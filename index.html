@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="반려동물과 함께 사는 사람을 위한 뷰티 브랜드 PETLOSOPHY. 지금 쓰는 화장품이 강아지·고양이에게 괜찮은지 무료로 확인해 보세요.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PETLOSOPHY | 반려인을 위한 뷰티">
+<meta property="og:description" content="나를 가꾸는 시간이, 너에게도 편안하도록. 내 화장품 성분을 강아지·고양이 기준으로 확인해 보세요.">
+<meta property="og:image" content="hero-cat.jpg">
+<link rel="icon" type="image/png" href="logo.png">
+<title>PETLOSOPHY | 반려인을 위한 뷰티</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* Layout: 화면 하나에 끝나는 히어로 → 공감 → 30초 체험(소피) → 앱(에스프레소 띠) → 이야기·기준 → 제품 → 설문 → FAQ. 모바일은 하단 고정 바. */
+:root{
+  --ivory:#FAF6F0; --cream:#F2E8DC; --paper:#FFFDF9; --line:#E6DACB;
+  --sand:#C9AE94; --sand-soft:#E9DCCB;
+  --cocoa:#60412D; --ink:#3A2D26; --muted:#7A6A5E;
+  --espresso:#44372E; --espresso-2:#56473C; --on-dark:#F2E8DC; --on-dark-muted:#CDBBA8;
+  --display:"Gowun Batang","Nanum Myeongjo",Georgia,serif;
+  --body:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --r:18px; --r-sm:12px;
+  --shadow:0 1px 2px rgba(60,40,28,.05),0 8px 24px rgba(60,40,28,.07);
+  --head:60px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--head) + 12px)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--ivory);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.7;word-break:keep-all;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--ivory)}
+a{color:inherit}
+img{display:block;max-width:100%}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);color:var(--cocoa);font-weight:700;line-height:1.35;text-wrap:balance;margin:0;letter-spacing:-.01em}
+h2{font-size:clamp(26px,3.6vw,38px)}
+h3{font-size:20px}
+p{margin:0}
+.eyebrow{font-size:13px;font-weight:500;letter-spacing:.14em;color:var(--muted);margin-bottom:14px;display:block}
+.lead{color:var(--muted);font-size:17px;max-width:34em;margin-top:14px}
+section{padding-block:clamp(64px,9vw,112px)}
+.sec-head{display:grid;gap:0;margin-bottom:clamp(32px,4vw,48px)}
+.sec-head.center{text-align:center;justify-items:center}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 24px;border-radius:999px;font:600 15px/1 var(--body);text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:background .2s,transform .2s,border-color .2s;white-space:nowrap}
+.btn:active{transform:translateY(1px)}
+.btn-main{background:var(--espresso);color:var(--on-dark)}
+.btn-main:hover{background:var(--cocoa)}
+.btn-line{border-color:var(--sand);color:var(--cocoa);background:transparent}
+.btn-line:hover{background:var(--sand-soft)}
+.btn-cream{background:var(--cream);color:var(--espresso)}
+.btn-cream:hover{background:#fff}
+.btn-ghost-dark{border-color:rgba(242,232,220,.4);color:var(--on-dark);background:transparent}
+.btn-ghost-dark:hover{background:rgba(242,232,220,.1)}
+.btn svg{width:16px;height:16px}
+:focus-visible{outline:2px solid var(--cocoa);outline-offset:3px;border-radius:6px}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(250,246,240,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
+.top.scrolled{border-bottom-color:var(--line)}
+.top .wrap{height:var(--head);display:flex;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto}
+.brand img{width:32px;height:32px}
+.brand span{font-weight:500;letter-spacing:.24em;font-size:14px;color:var(--cocoa)}
+.nav{display:flex;gap:26px;font-size:14px}
+.nav a{text-decoration:none;color:var(--muted)}
+.nav a:hover{color:var(--cocoa)}
+.top-actions{display:flex;gap:8px}
+.top-actions .btn{min-height:38px;padding:0 14px;font-size:13px}
+@media (max-width:900px){.nav{display:none}}
+@media (max-width:420px){.top-actions .app-open{display:none}}
+
+/* hero */
+.hero{padding-block:20px clamp(28px,4vw,48px)}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(28px,4vw,56px);align-items:center;min-height:min(calc(100svh - var(--head) - 48px),760px)}
+.hero-text{display:grid;gap:0;min-width:0}
+.hero h1{font-size:clamp(30px,3.7vw,50px)}
+.hero .lead{font-size:clamp(16px,1.4vw,18px);margin-top:20px}
+.hero-ctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:32px}
+.hero-note{display:flex;align-items:center;gap:8px;margin-top:22px;font-size:13px;color:var(--muted)}
+.hero-note svg{width:16px;height:16px;color:var(--sand);flex:none}
+.hero-photo{position:relative;border-radius:24px;overflow:hidden;background:var(--cream);height:min(calc(100svh - var(--head) - 88px),700px);min-height:420px}
+.hero-photo img{width:100%;height:100%;object-fit:cover;transition:opacity .45s ease}
+.hero-photo img.fade{opacity:0}
+.pet-switch{position:absolute;left:16px;bottom:16px;display:flex;gap:6px;padding:5px;border-radius:999px;background:rgba(250,246,240,.86);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.pet-switch button{border:0;background:transparent;border-radius:999px;padding:9px 16px;font:500 14px/1 var(--body);color:var(--muted);cursor:pointer}
+.pet-switch button[aria-pressed="true"]{background:var(--espresso);color:var(--on-dark)}
+@media (max-width:820px){
+  .hero{padding-top:12px}
+  .hero .wrap{grid-template-columns:1fr;min-height:0;gap:24px}
+  .hero-photo{order:-1;height:auto;min-height:0;aspect-ratio:5/4;max-height:52svh;width:100%}
+  .hero-ctas .btn{flex:1 1 160px}
+}
+
+/* moments */
+.moments{background:var(--paper);border-block:1px solid var(--line)}
+.quotes{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.quote{background:var(--ivory);border-radius:var(--r);padding:24px 22px 26px;display:grid;gap:14px;align-content:start;min-width:0}
+.quote .tag{justify-self:start;font-size:12px;font-weight:500;color:var(--cocoa);border:1px solid var(--sand);border-radius:999px;padding:4px 10px}
+.quote p{font-family:var(--display);font-size:18px;color:var(--ink);line-height:1.6}
+.quote small{font-size:13.5px;color:var(--muted);line-height:1.6}
+@media (max-width:1040px){.quotes{grid-template-columns:repeat(2,1fr)}}
+.moments-close{margin-top:36px;text-align:center;color:var(--muted)}
+.moments-close a{color:var(--cocoa);font-weight:500;text-underline-offset:4px}
+@media (max-width:820px){.quotes{grid-template-columns:1fr}}
+
+/* check (30s) */
+.check-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(24px,4vw,56px);align-items:start}
+.check-pick{display:grid;gap:22px;min-width:0}
+.pick-label{font-size:13px;color:var(--muted);font-weight:500;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:10px 18px;font:500 15px/1.2 var(--body);cursor:pointer;transition:border-color .2s,background .2s}
+.chip:hover{border-color:var(--sand)}
+.chip[aria-pressed="true"],.chip:has(input:checked){border-color:var(--espresso);background:var(--espresso);color:var(--on-dark)}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.result{background:var(--paper);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden;display:grid;grid-template-columns:150px 1fr;min-width:0}
+.result-sophie{background:#857a72;position:relative}
+.result-sophie img{width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+.result-body{padding:26px 26px 24px;display:grid;gap:14px;min-width:0}
+.result-tag{font-size:12px;letter-spacing:.12em;color:var(--muted);font-weight:500}
+.result h3{font-size:22px}
+.result ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.result li{display:grid;grid-template-columns:18px 1fr;gap:8px;font-size:15px;line-height:1.65}
+.result li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--sand);margin:9px 0 0 4px}
+.result li.pet-li::before{background:var(--cocoa)}
+.result-foot{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;padding-top:6px;border-top:1px dashed var(--line);margin-top:4px}
+.result-foot small{color:var(--muted);font-size:13px;flex:1 1 200px}
+.result-foot .btn{min-height:44px;font-size:14px}
+.fact{background:var(--cream);border-radius:var(--r);padding:18px 20px;display:grid;gap:6px}
+.fact b{font-family:var(--display);color:var(--cocoa);font-size:18px;font-weight:700}
+.fact p{font-size:14.5px;color:var(--ink);line-height:1.65}
+@media (max-width:820px){.check-grid{grid-template-columns:1fr}.result{grid-template-columns:1fr}.result-sophie{height:180px}.result-sophie img{object-position:50% 22%}}
+
+/* app band */
+.app{background:var(--espresso);color:var(--on-dark)}
+.app h2{color:var(--cream);font-size:clamp(30px,4.4vw,48px)}
+.app .eyebrow{color:var(--sand)}
+.app .lead{color:var(--on-dark-muted)}
+.app-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,5vw,72px);align-items:center}
+.steps{list-style:none;margin:36px 0 0;padding:0;display:grid;gap:4px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:16px 0;border-top:1px solid rgba(242,232,220,.14);counter-increment:s}
+.steps li::before{content:counter(s);width:36px;height:36px;border-radius:50%;border:1px solid var(--sand);display:grid;place-items:center;font:500 15px/1 var(--body);color:var(--sand)}
+.steps b{display:block;color:var(--cream);font-weight:500;font-size:17px}
+.steps span{color:var(--on-dark-muted);font-size:15px}
+.trust{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.trust span{font-size:13px;padding:7px 12px;border-radius:999px;background:var(--espresso-2);color:var(--on-dark)}
+.app-ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px;align-items:center}
+.app-note{font-size:13px;color:var(--on-dark-muted);margin-top:18px}
+.app-visual{display:grid;grid-template-columns:auto auto;gap:20px;align-items:end;justify-content:center}
+.phone{position:relative;width:min(290px,64vw);padding:10px;border-radius:44px;background:#1d1714;box-shadow:inset 0 0 0 1.5px #5b4b40,0 0 0 1px rgba(242,232,220,.08),0 28px 56px rgba(0,0,0,.38);justify-self:center}
+.phone-screen{border-radius:34px;overflow:hidden;aspect-ratio:366/788;background:#fff}
+.phone-screen img{width:100%;height:100%;object-fit:cover;object-position:50% 0}
+.phone-dot{position:absolute;top:17px;left:50%;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:#1d1714;box-shadow:0 0 0 2px #fff}
+.phone::after{content:"";position:absolute;right:-3px;top:110px;width:3px;height:56px;border-radius:0 3px 3px 0;background:#3a2f28}
+.qr-card{background:var(--paper);border-radius:var(--r);padding:16px;width:150px;text-align:center;color:var(--ink);display:grid;gap:8px}
+.qr-card img{width:118px;height:118px;margin:0 auto}
+.qr-card b{font-size:13px;font-weight:500}
+.qr-card button{border:0;background:none;font:500 12px/1 var(--body);color:var(--muted);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+@media (max-width:900px){.app-grid{grid-template-columns:1fr}.app-visual{grid-template-columns:1fr}.qr-card{display:none}}
+
+/* story */
+.story-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(28px,5vw,80px);align-items:center}
+.story-mark{background:var(--cream);border-radius:28px;aspect-ratio:1;max-width:100%;display:grid;place-items:center;align-content:center;gap:22px;padding:32px}
+.story-mark img{width:min(190px,45%)}
+.story-mark p{font-size:13px;letter-spacing:.16em;color:var(--muted);text-align:center}
+.story-mark p b{color:var(--cocoa);font-weight:500}
+.story-text{display:grid;gap:18px;min-width:0}
+.story-text .letter{display:grid;gap:14px;font-size:16.5px;color:var(--ink);max-width:36em;margin-top:8px}
+.story-text .sign{color:var(--muted);font-size:14px}
+.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:clamp(48px,6vw,72px)}
+.principle{border-top:1.5px solid var(--cocoa);padding-top:20px;display:grid;gap:8px;min-width:0}
+.principle svg{width:26px;height:26px;color:var(--cocoa);margin-bottom:4px}
+.principle p{color:var(--muted);font-size:15px}
+@media (max-width:820px){.story-grid{grid-template-columns:1fr}.story-mark{aspect-ratio:auto;padding:40px 24px}.principles{grid-template-columns:1fr}}
+
+/* products */
+.products{background:var(--cream)}
+.prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.prod{background:var(--paper);border-radius:22px;overflow:hidden;display:grid;min-width:0}
+.prod-art{height:240px;display:flex;align-items:center;justify-content:center;gap:14px;background:linear-gradient(160deg,#EADCCB,#DCC8B3)}
+.tube{width:74px;height:170px;border-radius:14px 14px 8px 8px;background:linear-gradient(90deg,#efe3d4,#fbf6ef 45%,#e4d4c1);transform:rotate(-12deg);position:relative;box-shadow:0 14px 24px rgba(60,40,28,.18)}
+.tube::after{content:"";position:absolute;left:12px;right:12px;bottom:-16px;height:22px;border-radius:4px;background:var(--cocoa)}
+.tube i{position:absolute;inset:40px 0 auto;text-align:center;font:500 8px/1.6 var(--body);letter-spacing:.18em;color:var(--cocoa);font-style:normal}
+.bottle{width:52px;height:110px;border-radius:12px;background:linear-gradient(90deg,#efe3d4,#fbf6ef 45%,#e4d4c1);position:relative;box-shadow:0 12px 20px rgba(60,40,28,.16);display:grid;place-items:center;font:500 9px/1 var(--body);letter-spacing:.1em;color:var(--cocoa)}
+.bottle::before{content:"";position:absolute;top:-20px;left:12px;right:12px;height:22px;border-radius:5px 5px 2px 2px;background:var(--cocoa)}
+.bottle.tall{height:136px}
+.prod-body{padding:24px 26px 28px;display:grid;gap:8px}
+.prod-title{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.pill{font-size:12px;padding:5px 11px;border-radius:999px;border:1px solid var(--sand);color:var(--cocoa);white-space:nowrap}
+.prod-body p{color:var(--muted);font-size:15px}
+.prod-foot{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between}
+.prod-foot small{color:var(--muted);font-size:13px}
+@media (max-width:820px){.prod-grid{grid-template-columns:1fr}}
+
+/* survey */
+.survey-shell{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(28px,5vw,72px);align-items:start}
+.survey-aside{display:grid;gap:18px;position:sticky;top:calc(var(--head) + 24px);min-width:0}
+.perk{display:flex;gap:14px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+.perk img{width:64px;height:64px;border-radius:14px;object-fit:cover;object-position:50% 15%;flex:none}
+.perk p{font-size:14px;color:var(--muted)}
+.perk b{display:block;color:var(--cocoa);font-weight:500;font-size:15px}
+.welcome{display:flex;gap:10px;align-items:flex-start;background:var(--espresso);color:var(--on-dark);border-radius:var(--r-sm);padding:14px 16px;font-size:14px}
+.welcome svg{width:18px;height:18px;flex:none;margin-top:3px;color:var(--sand)}
+.form{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:clamp(22px,3.5vw,40px);display:grid;gap:30px;box-shadow:var(--shadow);min-width:0}
+fieldset{border:0;margin:0;padding:0;display:grid;gap:12px;min-width:0}
+legend{padding:0;margin-bottom:12px;font-weight:500;color:var(--ink);font-size:16px}
+legend small{color:var(--muted);font-weight:400;font-size:13px;margin-left:6px}
+.qn{font-family:var(--display);color:var(--sand);margin-right:8px}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.scale .chip{text-align:center;padding:12px 0}
+.scale-ends{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+textarea,input[type=email]{width:100%;border:1.5px solid var(--line);border-radius:var(--r-sm);background:var(--ivory);padding:14px 16px;font:400 15px/1.6 var(--body);color:var(--ink);resize:vertical}
+textarea:focus,input[type=email]:focus{outline:none;border-color:var(--cocoa)}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted)}
+.consent input{margin-top:4px;accent-color:var(--espresso);width:16px;height:16px;flex:none}
+.form-foot{display:grid;gap:12px}
+.form-foot .btn{width:100%}
+.form-msg{font-size:14px;color:#9a4a2f;min-height:1em}
+.thanks{text-align:center;display:grid;gap:14px;justify-items:center;padding:24px 0}
+.thanks img{width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:50% 15%;background:#857a72}
+.thanks p{color:var(--muted)}
+.thanks small{font-size:12px;color:var(--muted)}
+@media (max-width:820px){.survey-shell{grid-template-columns:1fr}.survey-aside{position:static}}
+
+/* faq */
+.faq-list{max-width:780px;margin:0 auto;display:grid}
+.faq-list details{border-bottom:1px solid var(--line)}
+.faq-list summary{list-style:none;cursor:pointer;padding:22px 40px 22px 0;font-weight:500;font-size:17px;position:relative;color:var(--ink)}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary::after{content:"";position:absolute;right:6px;top:50%;width:10px;height:10px;border-right:1.5px solid var(--cocoa);border-bottom:1.5px solid var(--cocoa);transform:translateY(-70%) rotate(45deg);transition:transform .2s}
+.faq-list details[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
+.faq-list details p{padding:0 0 22px;color:var(--muted);max-width:40em}
+
+/* closing + footer */
+.closing{text-align:center;padding-block:clamp(72px,10vw,120px)}
+.closing h2{font-size:clamp(28px,4vw,44px)}
+.closing .lead{margin:16px auto 0}
+.closing .hero-ctas{justify-content:center}
+footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padding-block:48px 40px}
+.foot{display:grid;grid-template-columns:1.2fr 1fr;gap:32px}
+.foot .brand span{color:var(--cream)}
+.foot-info{display:grid;gap:6px}
+.foot-links{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:flex-end;align-content:start}
+.foot-links a{text-decoration:none;color:var(--on-dark)}
+.disclaimer{grid-column:1/-1;border-top:1px solid rgba(242,232,220,.14);padding-top:20px;line-height:1.7}
+@media (max-width:820px){.foot{grid-template-columns:1fr}.foot-links{justify-content:flex-start}}
+
+/* mobile bar */
+.mbar{display:none}
+@media (max-width:820px){
+  .mbar{display:grid;grid-template-columns:1fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:55;background:rgba(250,246,240,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:10px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))}
+  .mbar .btn{min-height:46px;font-size:14px;padding:0 10px}
+  body{padding-bottom:76px}
+}
+
+/* qr modal */
+.modal{position:fixed;inset:0;z-index:80;background:rgba(58,45,38,.5);display:grid;place-items:center;padding:20px}
+.modal-card{background:var(--paper);border-radius:24px;padding:28px;width:min(360px,100%);text-align:center;display:grid;gap:14px;position:relative}
+.modal-card img{width:220px;height:220px;margin:4px auto}
+.modal-card h3{font-size:22px}
+.modal-card p{color:var(--muted);font-size:14px}
+.modal-url{font-size:12px;color:var(--muted);background:var(--ivory);border-radius:10px;padding:10px;word-break:break-all;user-select:all}
+.modal-actions{display:flex;gap:8px}
+.modal-actions .btn{flex:1;min-height:44px;font-size:14px;padding:0 12px}
+.x{position:absolute;right:12px;top:12px;width:36px;height:36px;border:0;border-radius:50%;background:var(--ivory);cursor:pointer;font-size:20px;color:var(--muted);line-height:1}
+</style>
+</head>
+<body>
+
+<!-- header -->
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="brand" href="#hero" aria-label="PETLOSOPHY 처음으로"><img src="logo.png" alt=""><span>PETLOSOPHY</span></a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="#check">30초 체험</a>
+      <a href="#app">성분 확인 앱</a>
+      <a href="#story">브랜드 이야기</a>
+      <a href="#survey">1분 설문</a>
+      <a href="#faq">자주 묻는 질문</a>
+    </nav>
+    <div class="top-actions">
+      <button class="btn btn-line" type="button" data-open-qr aria-label="앱 접속 QR 코드 열기">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/></svg>QR</button>
+      <a class="btn btn-main app-open" href="https://app.petlosophy.co.kr/app/" target="_blank" rel="noopener">앱 열기</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- 1. hero -->
+<section class="hero" id="hero">
+  <div class="wrap">
+    <div class="hero-text">
+      <span class="eyebrow">반려인을 위한 뷰티</span>
+      <h1>나를 가꾸는 시간이,<br>너에게도 편안하도록.</h1>
+      <p class="lead">PETLOSOPHY는 반려동물과 함께 사는 사람을 위한 뷰티 브랜드예요. 지금 쓰는 화장품이 강아지·고양이에게 괜찮은지, 먼저 확인해 보세요.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-main" href="https://app.petlosophy.co.kr/app/" target="_blank" rel="noopener">내 화장품 확인하기
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+        <a class="btn btn-line" href="#check">30초 먼저 살펴보기</a>
+      </div>
+      <p class="hero-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6z"/><path d="m9 12 2 2 4-4"/></svg>수의학 전문기관 자료를 바탕으로 한 성분 확인 앱, 무료로 쓸 수 있어요</p>
+    </div>
+    <figure class="hero-photo" style="margin:0">
+      <img id="heroImg" src="hero-cat.jpg" alt="손바닥에 얼굴을 기대고 앞발로 손목을 감싼 고양이" style="object-position:62% 45%">
+      <div class="pet-switch" role="group" aria-label="함께 사는 반려동물">
+        <button type="button" data-pet="cat" aria-pressed="true">고양이와 살아요</button>
+        <button type="button" data-pet="dog" aria-pressed="false">강아지와 살아요</button>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- 2. moments -->
+<section class="moments" id="moments">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow">반려인의 일상</span>
+      <h2>이런 순간, 한 번쯤 있었죠?</h2>
+    </div>
+    <div class="quotes">
+      <article class="quote">
+        <span class="tag">핸드크림</span>
+        <p data-cat="“핸드크림 바른 손에 얼굴을 비비고, 한참 그루밍해요.”" data-dog="“핸드크림 바르고 쓰다듬었더니, 손을 한참 핥아요.”">“핸드크림 바른 손에 얼굴을 비비고, 한참 그루밍해요.”</p>
+        <small data-cat="털에 묻은 것까지 그대로 삼킬까 봐 마음이 쓰여요." data-dog="말려도 계속 핥으니, 이대로 괜찮은 건지 모르겠어요.">털에 묻은 것까지 그대로 삼킬까 봐 마음이 쓰여요.</small>
+      </article>
+      <article class="quote">
+        <span class="tag" data-cat="디퓨저" data-dog="립밤·선크림">디퓨저</span>
+        <p data-cat="“디퓨저를 들인 뒤로 재채기가 잦아졌어요.”" data-dog="“잠깐 한눈판 사이에 립밤을 물어뜯어 놨어요.”">“디퓨저를 들인 뒤로 재채기가 잦아졌어요.”</p>
+        <small data-cat="향 때문인지, 그냥 감기인지 알 수가 없어요." data-dog="얼마나 먹었는지, 병원에 가야 하는지부터 막막해요.">향 때문인지, 그냥 감기인지 알 수가 없어요.</small>
+      </article>
+      <article class="quote">
+        <span class="tag" data-cat="헤어·바디" data-dog="바디로션">헤어·바디</span>
+        <p data-cat="“샤워하고 나오면 젖은 머리카락을 핥아요.”" data-dog="“바디로션 바른 다리를 졸졸 따라다니며 핥아요.”">“샤워하고 나오면 젖은 머리카락을 핥아요.”</p>
+        <small data-cat="샴푸, 트리트먼트, 헤어오일까지 다 신경 쓰여요." data-dog="바를 때마다 방문을 닫아야 하나 고민돼요.">샴푸, 트리트먼트, 헤어오일까지 다 신경 쓰여요.</small>
+      </article>
+      <article class="quote">
+        <span class="tag" data-cat="에센셜 오일" data-dog="성분 검색">에센셜 오일</span>
+        <p data-cat="“에센셜 오일이 위험하다던데, 집에 있는 걸 다 버려야 할까요?”" data-dog="“검색할 때마다 괜찮다, 위험하다 말이 달라요.”">“에센셜 오일이 위험하다던데, 집에 있는 걸 다 버려야 할까요?”</p>
+        <small data-cat="뭐가 문제인지 알아야 고를 수 있잖아요." data-dog="성분표를 읽을수록 오히려 더 헷갈려요.">뭐가 문제인지 알아야 고를 수 있잖아요.</small>
+      </article>
+    </div>
+    <p class="moments-close">그 마음에서 PETLOSOPHY가 시작됐어요. <a href="#story">이야기 읽기</a></p>
+  </div>
+</section>
+
+<!-- 3. 30s check -->
+<section id="check">
+  <div class="wrap">
+    <div class="check-grid">
+      <div class="check-pick">
+        <div class="sec-head" style="margin-bottom:6px">
+          <span class="eyebrow">30초 체험</span>
+          <h2>요즘 자주 쓰는 제품을<br>골라보세요.</h2>
+          <p class="lead">함께 사는 아이 기준으로, 먼저 살펴보면 좋은 점을 알려드려요.</p>
+        </div>
+        <div>
+          <p class="pick-label">함께 사는 아이</p>
+          <div class="chips" role="group" aria-label="반려동물 선택">
+            <button class="chip" type="button" data-pet="cat" aria-pressed="true">고양이</button>
+            <button class="chip" type="button" data-pet="dog" aria-pressed="false">강아지</button>
+          </div>
+        </div>
+        <div>
+          <p class="pick-label">자주 쓰는 제품</p>
+          <div class="chips" role="group" aria-label="제품 선택" id="prodChips">
+            <button class="chip" type="button" data-prod="hand" aria-pressed="true">핸드크림</button>
+            <button class="chip" type="button" data-prod="perfume" aria-pressed="false">향수</button>
+            <button class="chip" type="button" data-prod="body" aria-pressed="false">바디로션·오일</button>
+            <button class="chip" type="button" data-prod="diffuser" aria-pressed="false">디퓨저·룸스프레이</button>
+          </div>
+        </div>
+        <div class="fact">
+          <b>천연·비건이면, 우리 아이에게도 안전할까요?</b>
+          <p data-cat="사람에게 순한 성분이 반려동물에게도 순한 건 아니에요. 오히려 아이에게 주의가 필요한 성분 중엔 식물에서 온 것이 많아요. 티트리, 유칼립투스, 레몬·오렌지 같은 에센셜 오일이 대표적이고, 고양이는 이런 성분을 몸에서 분해하는 힘이 특히 약해요." data-dog="사람에게 순한 성분이 반려동물에게도 순한 건 아니에요. 오히려 아이에게 주의가 필요한 성분 중엔 식물에서 온 것이 많아요. 티트리 같은 에센셜 오일, 립밤·치약에 들어가는 자일리톨이 대표적이에요. 자일리톨은 강아지에게 특히 위험해요.">사람에게 순한 성분이 반려동물에게도 순한 건 아니에요. 오히려 아이에게 주의가 필요한 성분 중엔 식물에서 온 것이 많아요. 티트리, 유칼립투스, 레몬·오렌지 같은 에센셜 오일이 대표적이고, 고양이는 이런 성분을 몸에서 분해하는 힘이 특히 약해요.</p>
+        </div>
+      </div>
+      <article class="result" aria-live="polite">
+        <div class="result-sophie"><img src="sophie.jpg" alt="스카프를 두른 펫로소피 캐릭터 고양이 소피"></div>
+        <div class="result-body">
+          <span class="result-tag" id="resTag">소피의 체크 포인트 · 고양이와 사는 집</span>
+          <h3 id="resTitle">핸드크림을 쓴다면</h3>
+          <ul id="resList"></ul>
+          <div class="result-foot">
+            <small>일반적인 참고 정보예요. 앱에서는 내 제품의 전성분을 강아지·고양이 모두에 대해 한 번에 확인할 수 있어요.</small>
+            <a class="btn btn-main" href="https://app.petlosophy.co.kr/app/" target="_blank" rel="noopener">내 제품 확인하기</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 4. app -->
+<section class="app" id="app">
+  <div class="wrap app-grid">
+    <div style="min-width:0">
+      <span class="eyebrow">PETLOSOPHY 성분 확인 앱</span>
+      <h2>바르기 전에,<br>성분 먼저.</h2>
+      <p class="lead">전성분표를 찍거나 붙여넣으면, 강아지·고양이에게 주의가 필요한 성분과 그 근거를 한 번에 알려드려요.</p>
+      <ol class="steps">
+        <li><div><b>찍기</b><span>전성분표를 촬영하거나 사진을 올려요. 직접 입력해도 돼요.</span></div></li>
+        <li><div><b>확인</b><span>강아지·고양이에게 주의가 필요한 성분을 한 화면에 표시해요. 따로 선택할 필요 없어요.</span></div></li>
+        <li><div><b>근거 보기</b><span>어떤 자료에 근거했는지 보여드려요. 주의가 필요하지만 펫 연구가 부족한 성분은 ‘근거 제한’으로 표시해요.</span></div></li>
+      </ol>
+      <div class="trust">
+        <span>수의학 전문기관 자료 기반 위험·주의 성분 DB</span>
+        <span>펫 연구가 부족한 주의 성분은 ‘근거 제한’</span>
+        <span>카카오톡 공유·결과 저장</span>
+      </div>
+      <div class="app-ctas">
+        <a class="btn btn-cream" href="https://app.petlosophy.co.kr/app/" target="_blank" rel="noopener">앱에서 확인하기</a>
+        <a class="btn btn-ghost-dark" href="#survey">써봤다면, 1분 설문</a>
+      </div>
+      <p class="app-note">참고용 정보이며, 수의학적 진단이나 제품의 안전 보증을 대신하지 않아요.</p>
+    </div>
+    <div class="app-visual">
+      <div class="phone" role="img" aria-label="PETLOSOPHY 앱 첫 화면. 바르기 전에, 성분 먼저. 촬영하기와 사진 넣기 버튼"><div class="phone-screen"><img src="app-screen-inner.jpg" alt=""></div><span class="phone-dot"></span></div>
+      <div class="qr-card">
+        <img src="qr.svg" alt="앱 접속 QR 코드">
+        <b>휴대폰으로 찍어 바로 열기</b>
+        <button type="button" data-open-qr>크게 보기</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. story + principles -->
+<section id="story">
+  <div class="wrap">
+    <div class="story-grid">
+      <div class="story-mark">
+        <img src="logo.png" alt="사람이 반려동물을 감싸 안은 모습의 PETLOSOPHY 심볼">
+        <p><b>PET</b> + <b>PHILOSOPHY</b><br>반려인의 뷰티 철학</p>
+      </div>
+      <div class="story-text">
+        <span class="eyebrow">브랜드 이야기</span>
+        <h2>사랑해서, 포기하지 않도록.</h2>
+        <div class="letter">
+          <p>고양이와 함께 사는 집사로서, 핸드크림 하나, 바디로션 하나, 향수 하나를 고를 때도 마음이 편하지 않았어요. 성분표를 읽어봐도 확신이 서지 않았고, 좋아하는 제품을 마음껏 쓰지 못했죠.</p>
+          <p>내가 바르는 것은 나에게서 끝나지 않아요. 같은 공간에서 숨 쉬고 체온을 나누는 아이에게도 닿으니까요.</p>
+          <p>그렇다고 함께 산다는 이유로 내 취향을 포기할 필요는 없다고 생각해요. 처음부터 함께 사는 생명까지 생각하고 만들면 되니까요. 그게 PETLOSOPHY가 만드는 뷰티예요.</p>
+        </div>
+        <p class="sign">고양이와 함께 사는 PETLOSOPHY 창업자</p>
+      </div>
+    </div>
+    <div class="principles">
+      <div class="principle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M9 11h4M11 9v4"/></svg>
+        <h3>성분 하나까지</h3>
+        <p>‘클린’이라는 말 대신, 성분의 역할과 양, 아이에게 닿을 가능성을 함께 봐요.</p>
+      </div>
+      <div class="principle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/></svg>
+        <h3>바른 뒤까지</h3>
+        <p>손과 피부, 옷에 남아 아이에게 닿는 순간까지 생각하며 만들어요.</p>
+      </div>
+      <div class="principle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+        <h3>천연보다, 근거</h3>
+        <p>천연·비건이라는 말이 반려동물에게도 안전하다는 뜻은 아니에요. 오히려 식물에서 온 성분이 아이에게 더 안 좋을 수도 있어요. 그래서 이름보다 근거를 보고 고르고, 전성분을 그대로 알려드려요.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. products -->
+<section class="products" id="products">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">준비 중인 제품</span>
+      <h2>곧, 매일 쓰는 아름다움으로.</h2>
+    </div>
+    <div class="prod-grid">
+      <article class="prod">
+        <div class="prod-art" aria-hidden="true"><div class="tube"><i>PETLOSOPHY<br>HAND</i></div></div>
+        <div class="prod-body">
+          <div class="prod-title"><h3>Hand &amp; Skin</h3><span class="pill">준비 중</span></div>
+          <p>아이와 가장 자주 닿는 손부터 시작해요. 핸드크림을 시작으로 바디·스킨케어를 준비하고 있어요.</p>
+        </div>
+      </article>
+      <article class="prod">
+        <div class="prod-art" aria-hidden="true"><div class="bottle">TOP</div><div class="bottle tall">MIDDLE</div><div class="bottle">BASE</div></div>
+        <div class="prod-body">
+          <div class="prod-title"><h3>Modular Fragrance</h3><span class="pill">준비 중</span></div>
+          <p>시트러스처럼 모두가 좋아하는 향을, 주의 성분 없이 최대한 가깝게 구현하고 있어요. 좋아하는 향을 내 취향대로 조합하는 나만의 향이에요.</p>
+        </div>
+      </article>
+    </div>
+    <div class="prod-foot">
+      <small>이미지는 콘셉트예요. 제형과 용기, 출시 일정은 제품화 과정에서 확정돼요.</small>
+      <a class="btn btn-main" href="#survey">출시 소식·30% 쿠폰 받기</a>
+    </div>
+  </div>
+</section>
+
+<!-- 7. survey -->
+<section id="survey">
+  <div class="wrap survey-shell">
+    <aside class="survey-aside">
+      <div class="welcome" id="welcome" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg>
+        <span>앱에서 결과를 확인하고 오셨군요. 써본 느낌을 1분만 들려주세요.</span>
+      </div>
+      <div class="sec-head" style="margin-bottom:0">
+        <span class="eyebrow">1분 설문</span>
+        <h2>써보셨다면,<br>한마디 들려주세요.</h2>
+        <p class="lead">1분이면 충분해요. 참여해주신 분께 첫 구매 30% 할인 쿠폰을 드려요.</p>
+      </div>
+      <div class="perk">
+        <img src="sophie.jpg" alt="">
+        <p><b>참여 혜택</b>출시 소식을 가장 먼저 알려드리고, <strong style="color:var(--cocoa)">첫 구매 30% 할인 쿠폰</strong>도 드려요.</p>
+      </div>
+      <p style="font-size:14px;color:var(--muted)">아직 앱을 안 써보셨나요? <a href="https://app.petlosophy.co.kr/app/" target="_blank" rel="noopener" style="color:var(--cocoa);font-weight:500">먼저 써보고 오기</a></p>
+    </aside>
+
+    <form class="form" id="surveyForm" novalidate>
+      <fieldset>
+        <legend><span class="qn">1</span>함께 사는 아이는요?</legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="pet" id="pet-cat" value="고양이" checked>고양이</label>
+          <label class="chip"><input type="radio" name="pet" id="pet-dog" value="강아지">강아지</label>
+          <label class="chip"><input type="radio" name="pet" id="pet-both" value="둘 다">둘 다</label>
+          <label class="chip"><input type="radio" name="pet" id="pet-none" value="아직 없어요">아직 없어요</label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend><span class="qn">2</span>평소 화장품 전성분이 아이에게 괜찮은지, 어떻게 확인하세요?<small>여러 개 골라도 돼요</small></legend>
+        <div class="chips" id="checkChips">
+          <label class="chip"><input type="checkbox" name="check" id="check-portal" value="검색창에 성분명·제품명 검색">검색창에 성분명·제품명 검색 (네이버·구글)</label>
+          <label class="chip"><input type="checkbox" name="check" id="check-lens" value="전성분표 사진 찍어 물어보기">전성분표 사진 찍어 물어보기 (구글 렌즈, 제미나이·챗GPT에 사진 올리기 등)</label>
+          <label class="chip"><input type="checkbox" name="check" id="check-ai" value="AI 챗봇에게 글로 질문">AI 챗봇에게 글로 질문 (챗GPT·제미나이 등)</label>
+          <label class="chip"><input type="checkbox" name="check" id="check-app" value="화장품 성분 분석 앱">화장품 성분 분석 앱</label>
+          <label class="chip"><input type="checkbox" name="check" id="check-community" value="반려인 카페·커뮤니티·SNS">반려인 카페·커뮤니티·SNS</label>
+          <label class="chip"><input type="checkbox" name="check" id="check-vet" value="수의사·동물병원 문의">수의사·동물병원 문의</label>
+          <label class="chip"><input type="checkbox" name="check" id="check-none" value="따로 확인하지 않아요">따로 확인하지 않아요</label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend><span class="qn">3</span>성분 확인 앱을 써보셨나요?</legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="used" id="used-yes" value="네" checked>네, 써봤어요</label>
+          <label class="chip"><input type="radio" name="used" id="used-no" value="아직">아직이에요</label>
+        </div>
+      </fieldset>
+      <fieldset id="easeSet">
+        <legend><span class="qn">4</span>결과를 이해하기 쉬웠나요?</legend>
+        <div class="scale">
+          <label class="chip"><input type="radio" name="ease" id="ease-1" value="1">1</label>
+          <label class="chip"><input type="radio" name="ease" id="ease-2" value="2">2</label>
+          <label class="chip"><input type="radio" name="ease" id="ease-3" value="3">3</label>
+          <label class="chip"><input type="radio" name="ease" id="ease-4" value="4">4</label>
+          <label class="chip"><input type="radio" name="ease" id="ease-5" value="5">5</label>
+        </div>
+        <div class="scale-ends"><span>어려웠어요</span><span>아주 쉬웠어요</span></div>
+      </fieldset>
+      <fieldset>
+        <legend><span class="qn">5</span>가장 기다리는 제품은요?<small>여러 개 골라도 돼요</small></legend>
+        <div class="chips">
+          <label class="chip"><input type="checkbox" name="want" id="want-hand" value="핸드크림">핸드크림</label>
+          <label class="chip"><input type="checkbox" name="want" id="want-body" value="바디·스킨케어">바디·스킨케어</label>
+          <label class="chip"><input type="checkbox" name="want" id="want-perfume" value="향수">향수</label>
+          <label class="chip"><input type="checkbox" name="want" id="want-home" value="홈 프래그런스">홈 프래그런스</label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend><span class="qn">6</span>화장품을 고를 때 가장 신경 쓰이는 점은요?<small>여러 개 골라도 돼요</small></legend>
+        <div class="chips">
+          <label class="chip"><input type="checkbox" name="worry" id="worry-lick" value="아이가 핥거나 먹을 때">아이가 핥거나 먹을 때</label>
+          <label class="chip"><input type="checkbox" name="worry" id="worry-scent" value="향과 냄새">향과 냄새</label>
+          <label class="chip"><input type="checkbox" name="worry" id="worry-touch" value="털·피부에 닿을 때">털·피부에 닿을 때</label>
+          <label class="chip"><input type="checkbox" name="worry" id="worry-label" value="성분표를 읽기 어려움">성분표를 읽기 어려움</label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend><span class="qn">7</span>더 하고 싶은 이야기가 있나요?<small>선택</small></legend>
+        <textarea id="comment" name="comment" rows="3" maxlength="1000" placeholder="앱을 쓰며 좋았던 점, 아쉬웠던 점, 바라는 제품을 자유롭게 적어주세요."></textarea>
+      </fieldset>
+      <fieldset>
+        <legend><span class="qn">8</span>출시 소식과 30% 할인 쿠폰을 받을 이메일<small>선택</small></legend>
+        <input type="email" id="email" name="email" placeholder="name@example.com" autocomplete="email">
+        <label class="consent"><input type="checkbox" id="consent" name="consent">출시 소식 안내와 할인 쿠폰 발송을 위해 이메일을 수집·이용하는 데 동의해요. (보관 기간: 동의 철회 또는 안내 종료 시까지)</label>
+      </fieldset>
+      <div class="form-foot">
+        <p class="form-msg" id="formMsg" role="alert"></p>
+        <button class="btn btn-main" type="submit" id="submitBtn">설문 보내기</button>
+      </div>
+    </form>
+    <div class="form thanks" id="thanks" hidden>
+      <img src="sophie.jpg" alt="">
+      <h3>고마워요, 잘 받았어요.</h3>
+      <p>보내주신 이야기는 제품을 만드는 데 소중히 쓸게요.<br>이메일을 남겨주셨다면, 출시에 맞춰 첫 구매 30% 할인 쿠폰을 보내드릴게요.</p>
+      <a class="btn btn-line" href="https://app.petlosophy.co.kr/app/" target="_blank" rel="noopener">다른 제품도 확인해보기</a>
+    </div>
+  </div>
+</section>
+
+<!-- 8. faq -->
+<section id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow">자주 묻는 질문</span>
+      <h2>꼼꼼한 마음에 답할게요.</h2>
+    </div>
+    <div class="faq-list">
+      <details><summary>반려동물에게 바르는 제품인가요?</summary><p>아니요, 사람이 쓰는 뷰티 제품이에요. 다만 바른 뒤 손과 피부, 옷을 통해 아이에게 닿는 순간, 그리고 향이 공기 중에 퍼져 아이가 들이마시는 것까지 고려해서 만들어요.</p></details>
+      <details><summary>천연·비건 화장품이면 괜찮지 않나요?</summary><p>많은 분이 그렇게 알고 계세요. 하지만 ‘천연’, ‘비건’은 원료가 어디서 왔는지를 말할 뿐, 반려동물에게 안전하다는 뜻은 아니에요. 사람에게 순한 성분이 반려동물에게도 순한 건 아니에요. 아이에게 주의가 필요한 화장품 성분 중엔 오히려 식물에서 온 것이 많아요. 티트리, 유칼립투스, 페퍼민트, 레몬·오렌지 같은 시트러스 오일은 천연 성분이지만 반려동물, 특히 고양이에게는 주의가 필요할 수 있어요. 시트러스 향의 주성분인 리모넨(Limonene)과 리날룰(Linalool)도 마찬가지예요. 그래서 ‘천연’, ‘비건’이라는 말보다 전성분을 함께 살펴보는 게 좋아요.<br><br>그렇다고 좋아하는 향을 포기할 필요는 없어요. PETLOSOPHY는 이런 주의 성분은 빼고, 사람들이 사랑하는 그 향은 최대한 살리는 포뮬러를 개발하고 있어요. 내 취향도, 아이의 안전도 포기하지 않도록요.</p></details>
+      <details><summary>앱은 ‘펫 안전’을 어떻게 판단하나요?</summary><p>수의학 전문기관 자료를 바탕으로 구성한 ‘위험·주의 성분 블랙리스트 DB’를 기준으로 판독해요. 주의가 필요하지만 반려동물 대상 연구가 아직 부족한 성분은 ‘근거 제한’으로 따로 표시해요.</p></details>
+      <details><summary>앱은 무료인가요? 설치해야 하나요?</summary><p>무료로 쓸 수 있어요. 인터넷 주소로 바로 열리고, 원하면 휴대폰 홈 화면에 추가해 앱처럼 쓸 수 있어요.</p></details>
+      <details><summary>제품은 어디서 만나볼 수 있나요?</summary><p>지금은 출시를 준비하고 있어요. 설문에 이메일을 남겨주시면 출시 소식을 가장 먼저 알려드리고, 첫 구매 30% 할인 쿠폰도 보내드려요.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 9. closing -->
+<section class="closing" style="background:var(--paper);border-top:1px solid var(--line)">
+  <div class="wrap">
+    <span class="eyebrow">PETLOSOPHY</span>
+    <h2>나를 위한 뷰티,<br>너와 함께하는 일상.</h2>
+    <p class="lead">가장 가까운 존재를 생각하는 마음에서 시작해요.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-main" href="https://app.petlosophy.co.kr/app/" target="_blank" rel="noopener">내 화장품 확인하기</a>
+      <a class="btn btn-line" href="#survey">출시 소식 받기</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="foot-info">
+      <a class="brand" href="#hero" style="margin-bottom:10px"><img src="logo-cream.png" alt=""><span>PETLOSOPHY</span></a>
+      <span>반려생활을 생각하는, 반려인의 뷰티</span>
+      <span>상호 [상호명] · 대표 [대표자명] · 사업자등록번호 [000-00-00000]</span>
+      <span>문의 [contact@petlosophy.co.kr]</span>
+    </div>
+    <div class="foot-links">
+      <a href="https://app.petlosophy.co.kr/app/" target="_blank" rel="noopener">성분 확인 앱</a>
+      <a href="#survey">1분 설문</a>
+      <a href="#faq">자주 묻는 질문</a>
+      <a href="#hero">개인정보처리방침</a>
+    </div>
+    <p class="disclaimer">성분 확인 앱의 정보는 참고용이며, 수의학적 진단이나 개별 제품의 안전 보증을 대신하지 않아요. 아이에게 이상 증상이 보이면 동물병원에 문의해 주세요.<br>© 2026 PETLOSOPHY. All rights reserved.</p>
+  </div>
+</footer>
+
+<div class="mbar">
+  <a class="btn btn-main" href="https://app.petlosophy.co.kr/app/" target="_blank" rel="noopener">성분 확인하기</a>
+  <a class="btn btn-line" href="#survey" style="background:var(--paper)">설문하고 30% 쿠폰</a>
+</div>
+
+<div class="modal" id="qrModal" hidden role="dialog" aria-modal="true" aria-labelledby="qrTitle">
+  <div class="modal-card">
+    <button class="x" type="button" data-close-qr aria-label="닫기">×</button>
+    <h3 id="qrTitle">휴대폰으로 바로 열기</h3>
+    <p>카메라로 QR을 비추면 성분 확인 앱이 열려요.</p>
+    <img src="qr.svg" alt="PETLOSOPHY 앱 접속 QR 코드">
+    <div class="modal-url" id="appUrl">https://app.petlosophy.co.kr/app/</div>
+    <div class="modal-actions">
+      <button class="btn btn-line" type="button" id="copyUrl">주소 복사</button>
+      <a class="btn btn-main" id="saveQr" href="qr.png" download="petlosophy-app-qr.png">QR 저장</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const APP = 'https://app.petlosophy.co.kr/app/';
+  const PET_WORD = {cat:'고양이', dog:'강아지'};
+  const HERO = {
+    cat:{src:'hero-cat.jpg', alt:'손바닥에 얼굴을 기대고 앞발로 손목을 감싼 고양이', pos:'62% 45%'},
+    dog:{src:'hero-dog.jpg', alt:'두 손에 얼굴을 맡기고 눈을 감은 강아지', pos:'74% 42%'}
+  };
+  const TIPS = {
+    hand:{title:'핸드크림을 쓴다면', base:[
+      '손은 아이와 가장 자주 닿는 곳이에요. 바른 직후에는 충분히 흡수시킨 뒤 쓰다듬어 주세요.',
+      '전성분에 에센셜 오일(티트리, 유칼립투스, 페퍼민트, 레몬·오렌지 같은 시트러스 오일)이나 시트러스 향 성분 리모넨(Limonene)·리날룰(Linalool)이 있는지 살펴보세요.'],
+      cat:'고양이는 몸에 묻은 것을 그루밍하며 삼키기 쉬워요. 손에 얼굴을 비비는 아이라면 더 신경 써 주세요.',
+      dog:'강아지는 손을 핥는 습관이 있어 바른 제품을 먹게 되기 쉬워요.'},
+    perfume:{title:'향수를 쓴다면', base:[
+      '뿌린 직후의 진한 향과 미스트는 아이 코에 훨씬 강하게 느껴질 수 있어요. 아이가 없는 공간에서 뿌려 주세요.',
+      '손목이나 목처럼 아이와 자주 닿는 곳보다는 옷 안쪽처럼 덜 닿는 곳을 골라 보세요.'],
+      cat:'고양이는 일부 향 성분을 몸 밖으로 내보내는 능력이 약해 에센셜 오일에 특히 민감할 수 있어요.',
+      dog:'후각이 예민한 강아지는 강한 향을 피해 자리를 옮기기도 해요. 아이의 반응을 살펴봐 주세요.'},
+    body:{title:'바디로션·오일을 쓴다면', base:[
+      '넓은 면적에 바르는 만큼, 안거나 기댈 때 아이에게 닿는 양도 많아요.',
+      '에센셜 오일이나 리모넨·리날룰 같은 향 성분이 들어 있는지 확인하고, 바른 뒤에는 흡수될 시간을 주세요.'],
+      cat:'무릎이나 팔에 올라와 몸을 비비는 고양이라면 바른 부위를 잠시 옷으로 덮어 주세요.',
+      dog:'다리나 팔을 핥는 강아지라면 바른 부위가 마를 때까지 거리를 두세요.'},
+    diffuser:{title:'디퓨저·룸스프레이를 쓴다면', base:[
+      '향이 공간 전체에 오래 머물러 아이가 피할 곳이 없을 수 있어요. 환기가 잘 되는 곳에 두고, 아이가 쉬는 곳과는 떨어뜨려 주세요.',
+      '쏟아진 오일을 아이가 밟거나 핥지 않도록 손이 닿지 않는 곳에 두세요.'],
+      cat:'디퓨저 오일에는 티트리, 유칼립투스, 시트러스 오일처럼 고양이에게 주의가 필요한 성분이 자주 들어 있어요. 리모넨·리날룰 표기도 꼭 확인해 주세요.',
+      dog:'꼬리나 몸에 걸려 넘어지지 않을 위치인지 확인해 주세요.'}
+  };
+  let pet = 'cat', prod = 'hand';
+
+  // header border on scroll
+  const top = document.getElementById('top');
+  const onScroll = () => top.classList.toggle('scrolled', scrollY > 8);
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  function renderTips(){
+    const t = TIPS[prod];
+    document.getElementById('resTag').textContent = '소피의 체크 포인트 · ' + PET_WORD[pet] + '와 사는 집';
+    document.getElementById('resTitle').textContent = t.title;
+    const ul = document.getElementById('resList'); ul.textContent = '';
+    [...t.base, t[pet]].forEach((s,i,arr) => {
+      const li = document.createElement('li'); li.textContent = s;
+      if (i === arr.length - 1) li.className = 'pet-li';
+      ul.appendChild(li);
+    });
+  }
+
+  const heroImg = document.getElementById('heroImg');
+  function setPet(p, fromUser){
+    if (p === pet && !fromUser) return;
+    pet = p;
+    document.querySelectorAll('[data-pet]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.pet === p)));
+    document.querySelectorAll('[data-pet-word]').forEach(el => el.textContent = PET_WORD[p]);
+    document.querySelectorAll('[data-cat]').forEach(el => el.textContent = el.dataset[p]);
+    const h = HERO[p];
+    if (!heroImg.src.endsWith(h.src)){
+      heroImg.classList.add('fade');
+      setTimeout(() => { heroImg.src = h.src; heroImg.alt = h.alt; heroImg.style.objectPosition = h.pos; heroImg.classList.remove('fade'); }, 220);
+    }
+    if (fromUser !== 'auto'){
+      const r = document.getElementById(p === 'cat' ? 'pet-cat' : 'pet-dog');
+      const cur = document.querySelector('input[name=pet]:checked');
+      if (r && cur && (cur.value === '고양이' || cur.value === '강아지')) r.checked = true;
+    }
+    renderTips();
+  }
+  // 선택 전에는 5.5초마다 고양이↔강아지 자동 전환, 한 번 고르면 고정
+  let picked = false;
+  const autoTimer = setInterval(() => {
+    if (picked) return clearInterval(autoTimer);
+    if (document.hidden) return;
+    setPet(pet === 'cat' ? 'dog' : 'cat', 'auto');
+  }, 5500);
+  document.querySelectorAll('[data-pet]').forEach(b => b.addEventListener('click', () => {
+    picked = true; clearInterval(autoTimer);
+    setPet(b.dataset.pet, true);
+  }));
+  document.querySelectorAll('[data-prod]').forEach(b => b.addEventListener('click', () => {
+    prod = b.dataset.prod;
+    document.querySelectorAll('[data-prod]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    renderTips();
+  }));
+  renderTips();
+
+  // QR modal
+  const modal = document.getElementById('qrModal');
+  const openQr = () => { modal.hidden = false; modal.querySelector('.x').focus(); };
+  const closeQr = () => { modal.hidden = true; };
+  document.querySelectorAll('[data-open-qr]').forEach(b => b.addEventListener('click', openQr));
+  modal.addEventListener('click', e => { if (e.target === modal || e.target.closest('[data-close-qr]')) closeQr(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) closeQr(); });
+  const copyBtn = document.getElementById('copyUrl');
+  copyBtn.addEventListener('click', () => {
+    const done = () => { copyBtn.textContent = '복사했어요'; setTimeout(() => copyBtn.textContent = '주소 복사', 1600); };
+    try {
+      navigator.clipboard.writeText(APP).then(done, () => {
+        const r = document.createRange(); r.selectNodeContents(document.getElementById('appUrl'));
+        const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+        copyBtn.textContent = '주소를 선택했어요';
+      });
+    } catch (e) {}
+  });
+
+  // survey: show Q3 only when used app
+  const easeSet = document.getElementById('easeSet');
+  const syncUsed = () => { easeSet.hidden = document.getElementById('used-no').checked; };
+  document.querySelectorAll('input[name=used]').forEach(r => r.addEventListener('change', syncUsed));
+
+  // arriving from the app: #from-app
+  function routeHash(){
+    if (location.hash === '#from-app'){
+      document.getElementById('welcome').hidden = false;
+      document.getElementById('used-yes').checked = true; syncUsed();
+      document.getElementById('survey').scrollIntoView();
+    }
+  }
+  addEventListener('hashchange', routeHash); routeHash();
+
+  // 설문 응답 → 구글 설문지(PETLOSOPHY 설문, 랜딩 연동) → 'PETLOSOPHY 설문 응답 시트'
+  const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfrDu-RTct1Gr38oot_2Xs6kohiFXZTAbXcXKuo4rbxPV4spQ/formResponse';
+  const F = {pet:'entry.908241900', usedApp:'entry.397561179', ease:'entry.1969276777', want:'entry.13696995',
+    worry:'entry.912259048', comment:'entry.2137961449', email:'entry.769750614', consent:'entry.94733687', fromApp:'entry.573634854', check:'entry.1820633836'};
+
+  // '따로 확인하지 않아요'는 다른 선택과 함께 고를 수 없게
+  const noneBox = document.getElementById('check-none');
+  document.querySelectorAll('input[name=check]').forEach(cb => cb.addEventListener('change', () => {
+    if (cb === noneBox && cb.checked) document.querySelectorAll('input[name=check]').forEach(x => { if (x !== noneBox) x.checked = false; });
+    else if (cb !== noneBox && cb.checked) noneBox.checked = false;
+  }));
+
+  const form = document.getElementById('surveyForm');
+  const msg = document.getElementById('formMsg');
+  form.addEventListener('submit', async e => {
+    e.preventDefault(); msg.textContent = '';
+    const fd = new FormData(form);
+    const email = (fd.get('email') || '').toString().trim();
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ msg.textContent = '이메일 주소 형식을 확인해 주세요.'; return; }
+    if (email && !fd.get('consent')){ msg.textContent = '이메일을 남기시려면 수집·이용 동의에 체크해 주세요.'; return; }
+    const used = fd.get('used');
+    const data = {
+      pet: fd.get('pet'), usedApp: used,
+      ease: used === '네' && fd.get('ease') ? Number(fd.get('ease')) : null,
+      check: fd.getAll('check'), want: fd.getAll('want'), worry: fd.getAll('worry'),
+      comment: (fd.get('comment') || '').toString().slice(0,1000),
+      email: email || null, consent: !!fd.get('consent'),
+      fromApp: location.hash === '#from-app',
+      submittedAt: new Date().toISOString()
+    };
+    const btn = document.getElementById('submitBtn'); btn.disabled = true; btn.textContent = '보내는 중…';
+    try {
+      const body = new URLSearchParams();
+      body.append(F.pet, data.pet || ''); body.append(F.usedApp, data.usedApp || '');
+      body.append(F.ease, data.ease == null ? '' : String(data.ease));
+      body.append(F.check, data.check.join(', ')); body.append(F.want, data.want.join(', ')); body.append(F.worry, data.worry.join(', '));
+      body.append(F.comment, data.comment); body.append(F.email, data.email || '');
+      body.append(F.consent, data.consent ? 'Y' : 'N'); body.append(F.fromApp, data.fromApp ? 'Y' : 'N');
+      await fetch(FORM_URL, {method:'POST', mode:'no-cors', body});
+    } catch (err) {
+      btn.disabled = false; btn.textContent = '설문 보내기';
+      msg.textContent = '인터넷 연결을 확인하고 다시 보내주세요.'; return;
+    }
+    btn.disabled = false; btn.textContent = '설문 보내기';
+    form.hidden = true;
+    const th = document.getElementById('thanks'); th.hidden = false;
+    th.scrollIntoView({block:'center'});
+  });
+})();
+</script>
+</body>
+</html>
