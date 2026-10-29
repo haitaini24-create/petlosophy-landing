@@ -526,30 +526,30 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
           <label class="chip"><input type="radio" name="pet" id="pet-cat" value="고양이" checked>고양이</label>
           <label class="chip"><input type="radio" name="pet" id="pet-dog" value="강아지">강아지</label>
           <label class="chip"><input type="radio" name="pet" id="pet-both" value="둘 다">둘 다</label>
-          <label class="chip"><input type="radio" name="pet" id="pet-none" value="아직 없어요">아직 없어요</label>
+          <label class="chip"><input type="radio" name="pet" id="pet-none" value="반려동물 없음">반려동물과 살지 않아요</label>
         </div>
       </fieldset>
       <fieldset>
-        <legend><span class="qn">2</span>평소 화장품 전성분이 아이에게 괜찮은지, 어떻게 확인하세요?<small>여러 개 골라도 돼요</small></legend>
+        <legend><span class="qn">2</span><span data-q-pet>평소 화장품 전성분이 아이에게 괜찮은지, 어떻게 확인하세요?</span><span data-q-nopet hidden>평소 쓰는 화장품의 전성분이 괜찮은지, 어떻게 확인하세요?</span><small>여러 개 골라도 돼요</small></legend>
         <div class="chips" id="checkChips">
           <label class="chip"><input type="checkbox" name="check" id="check-portal" value="검색창에 성분명·제품명 검색">검색창에 성분명·제품명 검색 (네이버·구글)</label>
           <label class="chip"><input type="checkbox" name="check" id="check-lens" value="전성분표 사진 찍어 물어보기">전성분표 사진 찍어 물어보기 (구글 렌즈, 제미나이·챗GPT에 사진 올리기 등)</label>
           <label class="chip"><input type="checkbox" name="check" id="check-ai" value="AI 챗봇에게 글로 질문">AI 챗봇에게 글로 질문 (챗GPT·제미나이 등)</label>
           <label class="chip"><input type="checkbox" name="check" id="check-app" value="화장품 성분 분석 앱">화장품 성분 분석 앱</label>
-          <label class="chip"><input type="checkbox" name="check" id="check-community" value="반려인 카페·커뮤니티·SNS">반려인 카페·커뮤니티·SNS</label>
-          <label class="chip"><input type="checkbox" name="check" id="check-vet" value="수의사·동물병원 문의">수의사·동물병원 문의</label>
+          <label class="chip"><input type="checkbox" name="check" id="check-community" value="반려인 카페·커뮤니티·SNS"><span id="communityText">반려인 카페·커뮤니티·SNS</span></label>
+          <label class="chip pet-only"><input type="checkbox" name="check" id="check-vet" value="수의사·동물병원 문의">수의사·동물병원 문의</label>
           <label class="chip"><input type="checkbox" name="check" id="check-none" value="따로 확인하지 않아요">따로 확인하지 않아요</label>
         </div>
       </fieldset>
       <fieldset>
-        <legend><span class="qn">3</span>성분 확인 앱을 써보셨나요?</legend>
+        <legend><span class="qn">3</span>PETLOSOPHY 성분 확인 앱을 써보셨나요?<small>이 페이지에서 연결되는 저희 앱이에요</small></legend>
         <div class="chips">
           <label class="chip"><input type="radio" name="used" id="used-yes" value="네" checked>네, 써봤어요</label>
           <label class="chip"><input type="radio" name="used" id="used-no" value="아직">아직이에요</label>
         </div>
       </fieldset>
       <fieldset id="easeSet">
-        <legend><span class="qn">4</span>결과를 이해하기 쉬웠나요?</legend>
+        <legend><span class="qn">4</span>PETLOSOPHY 앱의 결과를 이해하기 쉬웠나요?</legend>
         <div class="scale">
           <label class="chip"><input type="radio" name="ease" id="ease-1" value="1">1</label>
           <label class="chip"><input type="radio" name="ease" id="ease-2" value="2">2</label>
@@ -571,9 +571,10 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
       <fieldset>
         <legend><span class="qn">6</span>화장품을 고를 때 가장 신경 쓰이는 점은요?<small>여러 개 골라도 돼요</small></legend>
         <div class="chips">
-          <label class="chip"><input type="checkbox" name="worry" id="worry-lick" value="아이가 핥거나 먹을 때">아이가 핥거나 먹을 때</label>
+          <label class="chip pet-only"><input type="checkbox" name="worry" id="worry-lick" value="아이가 핥거나 먹을 때">아이가 핥거나 먹을 때</label>
           <label class="chip"><input type="checkbox" name="worry" id="worry-scent" value="향과 냄새">향과 냄새</label>
-          <label class="chip"><input type="checkbox" name="worry" id="worry-touch" value="털·피부에 닿을 때">털·피부에 닿을 때</label>
+          <label class="chip pet-only"><input type="checkbox" name="worry" id="worry-touch" value="털·피부에 닿을 때">털·피부에 닿을 때</label>
+          <label class="chip"><input type="checkbox" name="worry" id="worry-skin" value="내 피부 자극·트러블">내 피부 자극·트러블</label>
           <label class="chip"><input type="checkbox" name="worry" id="worry-label" value="성분표를 읽기 어려움">성분표를 읽기 어려움</label>
         </div>
       </fieldset>
@@ -799,6 +800,19 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
     if (cb === noneBox && cb.checked) document.querySelectorAll('input[name=check]').forEach(x => { if (x !== noneBox) x.checked = false; });
     else if (cb !== noneBox && cb.checked) noneBox.checked = false;
   }));
+
+  // 반려인 / 비반려인에 따라 질문과 보기 바꾸기
+  function syncPetQ(){
+    const none = document.getElementById('pet-none').checked;
+    document.querySelectorAll('[data-q-pet]').forEach(el => el.hidden = none);
+    document.querySelectorAll('[data-q-nopet]').forEach(el => el.hidden = !none);
+    document.querySelectorAll('.pet-only').forEach(el => { el.hidden = none; if (none) el.querySelector('input').checked = false; });
+    const com = document.getElementById('check-community');
+    com.value = none ? '뷰티 커뮤니티·SNS' : '반려인 카페·커뮤니티·SNS';
+    document.getElementById('communityText').textContent = com.value;
+  }
+  document.querySelectorAll('input[name=pet]').forEach(r => r.addEventListener('change', syncPetQ));
+  syncPetQ();
 
   const form = document.getElementById('surveyForm');
   const msg = document.getElementById('formMsg');
