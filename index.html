@@ -106,7 +106,7 @@ section{padding-block:clamp(64px,9vw,112px)}
 .quote small{font-size:13.5px;color:var(--muted);line-height:1.6}
 @media (max-width:1040px){.quotes{grid-template-columns:repeat(2,1fr)}}
 .moments-close{margin-top:36px;text-align:center;color:var(--muted)}
-.moments-close a{color:var(--cocoa);font-weight:500;text-underline-offset:4px}
+.moments-close a{display:inline-block;margin-top:6px;color:var(--cocoa);font-weight:500;text-underline-offset:4px}
 @media (max-width:820px){.quotes{grid-template-columns:1fr}}
 
 /* check (30s) */
@@ -241,6 +241,13 @@ legend small{display:block;margin:4px 0 0 32px;font-size:13px;color:var(--muted)
 .opt b{display:block;font-weight:500;font-size:15px;color:var(--ink);line-height:1.4}
 .opt small{display:block;font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.45}
 .opt-wide{grid-column:1/-1}
+.q-sec{font:600 12px/1 var(--body);letter-spacing:.14em;color:var(--sand);margin:6px 0 -12px;padding-top:4px}
+.form-intro{background:var(--ivory);border-radius:var(--r-sm);padding:12px 14px;font-size:14px;color:var(--muted)}
+.form-intro b{color:var(--cocoa);font-weight:500}
+.opts-1{grid-template-columns:1fr}
+.opt-radio::before{border-radius:50%}
+.opt-radio:has(input:checked)::before{background:var(--paper);box-shadow:inset 0 0 0 4px var(--paper),inset 0 0 0 10px var(--espresso)}
+
 @media (max-width:560px){.opts{grid-template-columns:1fr}}
 @media (max-width:820px){.survey-shell{grid-template-columns:1fr}.survey-aside{position:static}}
 
@@ -362,7 +369,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
         <small data-cat="뭐가 문제인지 알아야 고를 수 있잖아요." data-dog="성분표를 읽을수록 오히려 더 헷갈려요.">뭐가 문제인지 알아야 고를 수 있잖아요.</small>
       </article>
     </div>
-    <p class="moments-close">그 마음에서 PETLOSOPHY가 시작됐어요. <a href="#story">이야기 읽기</a></p>
+    <p class="moments-close">그 마음에서 PETLOSOPHY가 시작됐어요.<br><a href="#story">이야기 읽기</a></p>
   </div>
 </section>
 
@@ -526,8 +533,8 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
       </div>
       <div class="sec-head" style="margin-bottom:0">
         <span class="eyebrow">1분 설문</span>
-        <h2>써보셨다면,<br>한마디 들려주세요.</h2>
-        <p class="lead">1분이면 충분해요. 참여해주신 분께 첫 구매 30% 할인 쿠폰을 드려요.</p>
+        <h2>당신의 뷰티 습관을<br>들려주세요.</h2>
+        <p class="lead">평소 화장품을 어떻게 고르는지 들려주세요. 참여해주신 분께 첫 구매 30% 할인 쿠폰을 드려요.</p>
       </div>
       <div class="perk">
         <img src="sophie.jpg" alt="">
@@ -537,70 +544,181 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
     </aside>
 
     <form class="form" id="surveyForm" novalidate>
+      <p class="form-intro">정답은 없어요. <b>최근에 실제로 하셨던 일</b>을 떠올리며 골라주세요. 약 3분이면 끝나요.</p>
+      <p class="q-sec">먼저, 나에 대해</p>
       <fieldset>
-        <legend><span class="qn">1</span>함께 사는 아이는요?</legend>
+        <legend><span class="qn"></span>함께 사는 반려동물이 있나요?</legend>
         <div class="chips">
-          <label class="chip"><input type="radio" name="pet" id="pet-cat" value="고양이" checked>고양이</label>
+          <label class="chip"><input type="radio" name="pet" id="pet-cat" value="고양이">고양이</label>
           <label class="chip"><input type="radio" name="pet" id="pet-dog" value="강아지">강아지</label>
           <label class="chip"><input type="radio" name="pet" id="pet-both" value="둘 다">둘 다</label>
           <label class="chip"><input type="radio" name="pet" id="pet-none" value="반려동물 없음">반려동물과 살지 않아요</label>
         </div>
       </fieldset>
+      <p class="q-sec">평소의 뷰티 소비</p>
       <fieldset>
-        <legend><span class="qn">2</span><span data-q-pet>평소 화장품 전성분이 아이에게 괜찮은지, 어떻게 확인하세요?</span><span data-q-nopet hidden>평소 쓰는 화장품의 전성분이 괜찮은지, 어떻게 확인하세요?</span><small>여러 개 골라도 돼요</small></legend>
-        <div class="opts" id="checkChips">
-          <label class="opt"><input type="checkbox" name="check" id="check-portal" value="검색창에 성분명·제품명 검색"><span><b>검색창에 검색</b><small>네이버·구글</small></span></label>
-          <label class="opt"><input type="checkbox" name="check" id="check-lens" value="전성분표 사진 찍어 물어보기"><span><b>사진 찍어 물어보기</b><small>구글 렌즈·AI에 사진 올리기</small></span></label>
-          <label class="opt"><input type="checkbox" name="check" id="check-ai" value="AI 챗봇에게 글로 질문"><span><b>AI에게 글로 질문</b><small>챗GPT·제미나이 등</small></span></label>
-          <label class="opt"><input type="checkbox" name="check" id="check-app" value="화장품 성분 분석 앱"><span><b>화장품 성분 분석 앱</b></span></label>
-          <label class="opt"><input type="checkbox" name="check" id="check-community" value="반려인 카페·커뮤니티·SNS"><span><b id="communityText">반려인 카페·커뮤니티·SNS</b></span></label>
-          <label class="opt pet-only"><input type="checkbox" name="check" id="check-vet" value="수의사·동물병원 문의"><span><b>수의사·동물병원에 문의</b></span></label>
-          <label class="opt opt-wide"><input type="checkbox" name="check" id="check-none" value="따로 확인하지 않아요"><span><b>따로 확인하지 않아요</b></span></label>
+        <legend><span class="qn"></span>최근 3개월 동안 직접 산 제품을 모두 골라주세요.<small>여러 개 골라도 돼요</small></legend>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="bought" id="bought-0" value="스킨케어"><span><b>스킨케어</b></span></label>
+          <label class="opt"><input type="checkbox" name="bought" id="bought-1" value="핸드크림"><span><b>핸드크림</b></span></label>
+          <label class="opt"><input type="checkbox" name="bought" id="bought-2" value="바디로션·오일"><span><b>바디로션·오일</b></span></label>
+          <label class="opt"><input type="checkbox" name="bought" id="bought-3" value="향수"><span><b>향수</b></span></label>
+          <label class="opt"><input type="checkbox" name="bought" id="bought-4" value="헤어 제품"><span><b>헤어 제품</b><small>샴푸·트리트먼트·헤어오일</small></span></label>
+          <label class="opt"><input type="checkbox" name="bought" id="bought-5" value="홈 프래그런스"><span><b>홈 프래그런스</b><small>디퓨저·캔들·룸스프레이</small></span></label>
+          <label class="opt"><input type="checkbox" name="bought" id="bought-6" value="메이크업"><span><b>메이크업</b></span></label>
+          <label class="opt opt-wide"><input type="checkbox" name="bought" id="bought-7" value="산 적 없음" data-excl><span><b>최근 3개월엔 산 적 없어요</b></span></label>
         </div>
       </fieldset>
       <fieldset>
-        <legend><span class="qn">3</span>PETLOSOPHY 성분 확인 앱을 써보셨나요?<small>이 페이지에서 연결되는 저희 앱이에요</small></legend>
+        <legend><span class="qn"></span>가장 최근에 산 화장품은 처음에 어떻게 알게 되었나요?</legend>
+        <div class="opts">
+          <label class="opt opt-radio"><input type="radio" name="found" id="found-0" value="쓰던 제품 재구매"><span><b>원래 쓰던 제품이에요</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="found" id="found-1" value="지인 추천"><span><b>지인 추천</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="found" id="found-2" value="SNS·인플루언서"><span><b>SNS·인플루언서</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="found" id="found-3" value="광고"><span><b>광고를 보고</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="found" id="found-4" value="매장"><span><b>매장에서 보고</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="found" id="found-5" value="검색·리뷰 비교"><span><b>직접 검색하고 리뷰를 비교해서</b></span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend><span class="qn"></span>그 제품을 사기 전에 실제로 확인한 것을 모두 골라주세요.<small>여러 개 골라도 돼요 · 기억나는 대로</small></legend>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="checked" id="checked-0" value="가격·할인"><span><b>가격·할인</b></span></label>
+          <label class="opt"><input type="checkbox" name="checked" id="checked-1" value="리뷰·평점"><span><b>리뷰·평점</b></span></label>
+          <label class="opt"><input type="checkbox" name="checked" id="checked-2" value="브랜드"><span><b>브랜드</b></span></label>
+          <label class="opt"><input type="checkbox" name="checked" id="checked-3" value="향·사용감"><span><b>향·사용감 (테스터 등)</b></span></label>
+          <label class="opt"><input type="checkbox" name="checked" id="checked-4" value="전성분"><span><b>전성분</b></span></label>
+          <label class="opt"><input type="checkbox" name="checked" id="checked-5" value="인증 표시"><span><b>인증 표시</b><small>비건·유기농·저자극 등</small></span></label>
+          <label class="opt opt-wide"><input type="checkbox" name="checked" id="checked-6" value="확인 안 함" data-excl><span><b>특별히 확인한 건 없어요</b></span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend><span class="qn"></span>최근 6개월 동안, 화장품의 전성분을 직접 찾아본 적이 있나요?</legend>
+        <div class="opts">
+          <label class="opt opt-radio"><input type="radio" name="freq" id="freq-0" value="거의 매번"><span><b>살 때마다 거의 매번</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="freq" id="freq-1" value="가끔"><span><b>가끔</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="freq" id="freq-2" value="한두 번"><span><b>한두 번 정도</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="freq" id="freq-3" value="없음"><span><b>한 번도 없어요</b></span></label>
+        </div>
+      </fieldset>
+      <fieldset data-when="freq!=없음">
+        <legend><span class="qn"></span>전성분은 주로 어떤 방법으로 확인하셨나요?<small>여러 개 골라도 돼요</small></legend>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="method" id="method-0" value="검색창 검색"><span><b>검색창에 검색</b><small>네이버·구글</small></span></label>
+          <label class="opt"><input type="checkbox" name="method" id="method-1" value="사진 찍어 물어보기"><span><b>사진 찍어 물어보기</b><small>구글 렌즈·AI에 사진 올리기</small></span></label>
+          <label class="opt"><input type="checkbox" name="method" id="method-2" value="AI에게 글로 질문"><span><b>AI에게 글로 질문</b><small>챗GPT·제미나이 등</small></span></label>
+          <label class="opt"><input type="checkbox" name="method" id="method-3" value="성분 분석 앱"><span><b>화장품 성분 분석 앱</b></span></label>
+          <label class="opt"><input type="checkbox" name="method" id="method-4" value="커뮤니티·SNS"><span><b id="communityText">반려인 카페·커뮤니티·SNS</b></span></label>
+          <label class="opt"><input type="checkbox" name="method" id="method-5" value="제품 뒷면만 읽음"><span><b>제품 뒷면 표기만 읽어봐요</b></span></label>
+          <label class="opt pet-only opt-wide"><input type="checkbox" name="method" id="method-6" value="수의사·동물병원"><span><b>수의사·동물병원에 문의</b></span></label>
+        </div>
+      </fieldset>
+      <fieldset data-when="freq!=없음">
+        <legend><span class="qn"></span>가장 최근에 전성분을 찾아본 이유는 무엇이었나요?</legend>
+        <div class="opts">
+          <label class="opt opt-radio"><input type="radio" name="trigger" id="trigger-0" value="피부 트러블·자극"><span><b>피부 트러블·자극이 생겨서</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="trigger" id="trigger-1" value="알레르기·민감 피부"><span><b>알레르기·민감한 피부라서</b></span></label>
+          <label class="opt opt-radio pet-only"><input type="radio" name="trigger" id="trigger-2" value="반려동물"><span><b>함께 사는 아이 때문에</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="trigger" id="trigger-3" value="임신·육아"><span><b>임신·육아 중이라서</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="trigger" id="trigger-4" value="광고 검증"><span><b>광고 문구가 사실인지 궁금해서</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="trigger" id="trigger-5" value="호기심"><span><b>그냥 궁금해서</b></span></label>
+        </div>
+      </fieldset>
+      <fieldset data-when="freq!=없음">
+        <legend><span class="qn"></span>전성분을 찾아볼 때 가장 어려웠던 점 하나를 골라주세요.</legend>
+        <div class="opts">
+          <label class="opt opt-radio"><input type="radio" name="hard" id="hard-0" value="성분 이름이 어려움"><span><b>성분 이름이 어렵고 낯설어요</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="hard" id="hard-1" value="정보가 서로 다름"><span><b>찾을 때마다 말이 달라요</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="hard" id="hard-2" value="내 상황 정보 없음"><span><b>내 상황에 맞는 정보가 없어요</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="hard" id="hard-3" value="시간이 오래 걸림"><span><b>하나하나 찾느라 오래 걸려요</b></span></label>
+          <label class="opt opt-radio opt-wide"><input type="radio" name="hard" id="hard-4" value="어렵지 않음"><span><b>특별히 어렵지 않았어요</b></span></label>
+        </div>
+      </fieldset>
+      <fieldset data-when="freq=없음">
+        <legend><span class="qn"></span>전성분을 찾아보지 않은 가장 큰 이유는 무엇인가요?</legend>
+        <div class="opts">
+          <label class="opt opt-radio"><input type="radio" name="never" id="never-0" value="필요를 못 느낌"><span><b>필요하다고 느낀 적이 없어요</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="never" id="never-1" value="봐도 모름"><span><b>봐도 무슨 뜻인지 몰라서</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="never" id="never-2" value="번거로움"><span><b>시간이 없고 번거로워서</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="never" id="never-3" value="브랜드·리뷰 신뢰"><span><b>브랜드나 리뷰를 믿어서</b></span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend><span class="qn"></span>‘천연’, ‘비건’, ‘저자극’ 같은 표시를 보면 보통 어떻게 하세요?</legend>
+        <div class="opts opts-1">
+          <label class="opt opt-radio"><input type="radio" name="claim" id="claim-0" value="믿고 고름"><span><b>그 표시를 믿고 고르는 편이에요</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="claim" id="claim-1" value="참고 후 전성분 확인"><span><b>참고는 하지만 전성분도 확인해요</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="claim" id="claim-2" value="신경 안 씀"><span><b>별로 신경 쓰지 않아요</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="claim" id="claim-3" value="오히려 의심"><span><b>오히려 의심부터 들어요</b></span></label>
+        </div>
+      </fieldset>
+      <p class="q-sec" data-when="pet!=반려동물 없음">반려 생활 속 뷰티</p>
+      <fieldset data-when="pet!=반려동물 없음">
+        <legend><span class="qn"></span>최근 한 달 사이 있었던 일을 모두 골라주세요.<small>여러 개 골라도 돼요</small></legend>
+        <div class="opts opts-1">
+          <label class="opt"><input type="checkbox" name="contact" id="contact-0" value="바른 손을 핥음"><span><b>화장품 바른 손이나 몸을 아이가 핥았어요</b></span></label>
+          <label class="opt"><input type="checkbox" name="contact" id="contact-1" value="바른 뒤 바로 안음"><span><b>바르고 바로 아이를 안거나 쓰다듬었어요</b></span></label>
+          <label class="opt"><input type="checkbox" name="contact" id="contact-2" value="향 공간에 함께 있음"><span><b>향수·디퓨저를 쓴 공간에 아이가 함께 있었어요</b></span></label>
+          <label class="opt"><input type="checkbox" name="contact" id="contact-3" value="제품을 물거나 먹음"><span><b>아이가 화장품이나 용기를 물거나 먹었어요</b></span></label>
+          <label class="opt"><input type="checkbox" name="contact" id="contact-4" value="기억나는 일 없음" data-excl><span><b>기억나는 일이 없어요</b></span></label>
+        </div>
+      </fieldset>
+      <fieldset data-when="pet!=반려동물 없음">
+        <legend><span class="qn"></span>아이 때문에 화장품이나 향 제품을 바꾸거나 줄인 적이 있나요?</legend>
+        <div class="opts">
+          <label class="opt opt-radio"><input type="radio" name="change" id="change-0" value="있음"><span><b>네, 바꾸거나 줄였어요</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="change" id="change-1" value="고민만"><span><b>고민만 해봤어요</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="change" id="change-2" value="없음"><span><b>없어요</b></span></label>
+        </div>
+      </fieldset>
+      <fieldset data-when="change=있음">
+        <legend><span class="qn"></span>어떤 제품을 바꾸거나 줄였나요?<small>여러 개 골라도 돼요</small></legend>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="changed" id="changed-0" value="향수"><span><b>향수</b></span></label>
+          <label class="opt"><input type="checkbox" name="changed" id="changed-1" value="홈 프래그런스"><span><b>홈 프래그런스</b><small>디퓨저·캔들 등</small></span></label>
+          <label class="opt"><input type="checkbox" name="changed" id="changed-2" value="핸드크림"><span><b>핸드크림</b></span></label>
+          <label class="opt"><input type="checkbox" name="changed" id="changed-3" value="바디 제품"><span><b>바디 제품</b></span></label>
+          <label class="opt"><input type="checkbox" name="changed" id="changed-4" value="헤어 제품"><span><b>헤어 제품</b></span></label>
+          <label class="opt"><input type="checkbox" name="changed" id="changed-5" value="기타"><span><b>기타</b></span></label>
+        </div>
+      </fieldset>
+      <fieldset data-when="change=있음|고민만">
+        <legend><span class="qn"></span>그때 무엇을 보고 판단하셨나요?</legend>
+        <div class="opts">
+          <label class="opt opt-radio"><input type="radio" name="decide" id="decide-0" value="수의사"><span><b>수의사·동물병원 안내</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="decide" id="decide-1" value="반려인 커뮤니티"><span><b>반려인 카페·커뮤니티</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="decide" id="decide-2" value="검색·AI"><span><b>검색이나 AI 답변</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="decide" id="decide-3" value="제품 표시"><span><b>제품에 적힌 표시</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="decide" id="decide-4" value="아이 반응"><span><b>아이 반응을 보고 직접</b></span></label>
+        </div>
+      </fieldset>
+      <p class="q-sec">마지막으로</p>
+      <fieldset>
+        <legend><span class="qn"></span>한 달에 화장품·향 제품에 쓰는 금액은 대략 얼마인가요?</legend>
         <div class="chips">
-          <label class="chip"><input type="radio" name="used" id="used-yes" value="네" checked>네, 써봤어요</label>
-          <label class="chip"><input type="radio" name="used" id="used-no" value="아직">아직이에요</label>
-        </div>
-      </fieldset>
-      <fieldset id="easeSet">
-        <legend><span class="qn">4</span>PETLOSOPHY 앱의 결과를 이해하기 쉬웠나요?</legend>
-        <div class="scale">
-          <label class="chip"><input type="radio" name="ease" id="ease-1" value="1">1</label>
-          <label class="chip"><input type="radio" name="ease" id="ease-2" value="2">2</label>
-          <label class="chip"><input type="radio" name="ease" id="ease-3" value="3">3</label>
-          <label class="chip"><input type="radio" name="ease" id="ease-4" value="4">4</label>
-          <label class="chip"><input type="radio" name="ease" id="ease-5" value="5">5</label>
-        </div>
-        <div class="scale-ends"><span>어려웠어요</span><span>아주 쉬웠어요</span></div>
-      </fieldset>
-      <fieldset>
-        <legend><span class="qn">5</span>가장 기다리는 제품은요?<small>여러 개 골라도 돼요</small></legend>
-        <div class="opts">
-          <label class="opt"><input type="checkbox" name="want" id="want-hand" value="핸드크림"><span><b>핸드크림</b></span></label>
-          <label class="opt"><input type="checkbox" name="want" id="want-body" value="바디·스킨케어"><span><b>바디·스킨케어</b></span></label>
-          <label class="opt"><input type="checkbox" name="want" id="want-perfume" value="향수"><span><b>향수</b></span></label>
-          <label class="opt"><input type="checkbox" name="want" id="want-home" value="홈 프래그런스"><span><b>홈 프래그런스</b><small>디퓨저·룸스프레이</small></span></label>
+          <label class="chip"><input type="radio" name="spend" id="spend-0" value="3만 원 미만">3만 원 미만</label>
+          <label class="chip"><input type="radio" name="spend" id="spend-1" value="3~5만 원">3~5만 원</label>
+          <label class="chip"><input type="radio" name="spend" id="spend-2" value="5~10만 원">5~10만 원</label>
+          <label class="chip"><input type="radio" name="spend" id="spend-3" value="10~20만 원">10~20만 원</label>
+          <label class="chip"><input type="radio" name="spend" id="spend-4" value="20만 원 이상">20만 원 이상</label>
         </div>
       </fieldset>
       <fieldset>
-        <legend><span class="qn">6</span>화장품을 고를 때 가장 신경 쓰이는 점은요?<small>여러 개 골라도 돼요</small></legend>
-        <div class="opts">
-          <label class="opt pet-only"><input type="checkbox" name="worry" id="worry-lick" value="아이가 핥거나 먹을 때"><span><b>아이가 핥거나 먹을 때</b></span></label>
-          <label class="opt pet-only"><input type="checkbox" name="worry" id="worry-touch" value="털·피부에 닿을 때"><span><b>아이 털·피부에 닿을 때</b></span></label>
-          <label class="opt"><input type="checkbox" name="worry" id="worry-scent" value="향과 냄새"><span><b>향과 냄새</b></span></label>
-          <label class="opt"><input type="checkbox" name="worry" id="worry-skin" value="내 피부 자극·트러블"><span><b>내 피부 자극·트러블</b></span></label>
-          <label class="opt opt-wide"><input type="checkbox" name="worry" id="worry-label" value="성분표를 읽기 어려움"><span><b>성분표를 읽기 어려움</b></span></label>
+        <legend><span class="qn"></span>연령대를 알려주세요.</legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="age" id="age-0" value="20대 미만">20대 미만</label>
+          <label class="chip"><input type="radio" name="age" id="age-1" value="20대">20대</label>
+          <label class="chip"><input type="radio" name="age" id="age-2" value="30대">30대</label>
+          <label class="chip"><input type="radio" name="age" id="age-3" value="40대">40대</label>
+          <label class="chip"><input type="radio" name="age" id="age-4" value="50대 이상">50대 이상</label>
         </div>
       </fieldset>
       <fieldset>
-        <legend><span class="qn">7</span>더 하고 싶은 이야기가 있나요?<small>선택</small></legend>
-        <textarea id="comment" name="comment" rows="3" maxlength="1000" placeholder="앱을 쓰며 좋았던 점, 아쉬웠던 점, 바라는 제품을 자유롭게 적어주세요."></textarea>
+        <legend><span class="qn"></span>더 하고 싶은 이야기가 있나요?<small>선택</small></legend>
+        <textarea id="comment" name="comment" rows="3" maxlength="1000" placeholder="화장품을 고를 때 불편했던 점이나 바라는 점을 자유롭게 적어주세요."></textarea>
       </fieldset>
       <fieldset>
-        <legend><span class="qn">8</span>출시 소식과 30% 할인 쿠폰을 받을 이메일<small>선택</small></legend>
+        <legend><span class="qn"></span>출시 소식과 30% 할인 쿠폰을 받을 이메일<small>선택</small></legend>
         <input type="email" id="email" name="email" placeholder="name@example.com" autocomplete="email">
         <label class="consent"><input type="checkbox" id="consent" name="consent">출시 소식 안내와 할인 쿠폰 발송을 위해 이메일을 수집·이용하는 데 동의해요. (보관 기간: 동의 철회 또는 안내 종료 시까지)</label>
       </fieldset>
@@ -750,7 +868,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
     if (fromUser !== 'auto'){
       const r = document.getElementById(p === 'cat' ? 'pet-cat' : 'pet-dog');
       const cur = document.querySelector('input[name=pet]:checked');
-      if (r && cur && (cur.value === '고양이' || cur.value === '강아지')) r.checked = true;
+      if (r && (!cur || cur.value === '고양이' || cur.value === '강아지')) { r.checked = true; window.__syncSurvey && window.__syncSurvey(); }
     }
     renderTips();
   }
@@ -791,45 +909,58 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
     } catch (e) {}
   });
 
-  // survey: show Q3 only when used app
-  const easeSet = document.getElementById('easeSet');
-  const syncUsed = () => { easeSet.hidden = document.getElementById('used-no').checked; };
-  document.querySelectorAll('input[name=used]').forEach(r => r.addEventListener('change', syncUsed));
 
   // arriving from the app: #from-app
   function routeHash(){
     if (location.hash === '#from-app'){
       document.getElementById('welcome').hidden = false;
-      document.getElementById('used-yes').checked = true; syncUsed();
       document.getElementById('survey').scrollIntoView();
     }
   }
   addEventListener('hashchange', routeHash); routeHash();
 
-  // 설문 응답 → 구글 설문지(PETLOSOPHY 설문, 랜딩 연동) → 'PETLOSOPHY 설문 응답 시트'
+  // 설문 응답 → 구글 설문지 'PETLOSOPHY 설문 (랜딩 연동)' → 'PETLOSOPHY 설문 응답 시트'
   const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfrDu-RTct1Gr38oot_2Xs6kohiFXZTAbXcXKuo4rbxPV4spQ/formResponse';
-  const F = {pet:'entry.908241900', usedApp:'entry.397561179', ease:'entry.1969276777', want:'entry.13696995',
-    worry:'entry.912259048', comment:'entry.2137961449', email:'entry.769750614', consent:'entry.94733687', fromApp:'entry.573634854', check:'entry.1820633836'};
+  const F = {pet:'908241900', bought:'397561179', found:'1969276777', checked:'13696995', freq:'912259048', method:'1820633836',
+    trigger:'1382005376', hard:'2105199102', never:'1760678791', claim:'679808888', contact:'434237291', change:'500446570',
+    changed:'67625606', decide:'1283573343', spend:'1794421606', age:'1641112334', comment:'2137961449', email:'769750614',
+    consent:'94733687', fromApp:'573634854'};
 
-  // '따로 확인하지 않아요'는 다른 선택과 함께 고를 수 없게
-  const noneBox = document.getElementById('check-none');
-  document.querySelectorAll('input[name=check]').forEach(cb => cb.addEventListener('change', () => {
-    if (cb === noneBox && cb.checked) document.querySelectorAll('input[name=check]').forEach(x => { if (x !== noneBox) x.checked = false; });
-    else if (cb !== noneBox && cb.checked) noneBox.checked = false;
-  }));
-
-  // 반려인 / 비반려인에 따라 질문과 보기 바꾸기
-  function syncPetQ(){
-    const none = document.getElementById('pet-none').checked;
-    document.querySelectorAll('[data-q-pet]').forEach(el => el.hidden = none);
-    document.querySelectorAll('[data-q-nopet]').forEach(el => el.hidden = !none);
-    document.querySelectorAll('.pet-only').forEach(el => { el.hidden = none; if (none) el.querySelector('input').checked = false; });
-    const com = document.getElementById('check-community');
-    com.value = none ? '뷰티 커뮤니티·SNS' : '반려인 카페·커뮤니티·SNS';
-    document.getElementById('communityText').textContent = com.value;
+  // 설문: 단독 선택 보기, 조건부 질문, 반려인/비반려인 분기, 자동 번호
+  const formEl = document.getElementById('surveyForm');
+  formEl.addEventListener('change', e => {
+    const t = e.target;
+    if (t.type === 'checkbox' && t.name && t.checked){
+      if (t.hasAttribute('data-excl')) formEl.querySelectorAll(`input[name="${t.name}"]`).forEach(x => { if (x !== t) x.checked = false; });
+      else formEl.querySelectorAll(`input[name="${t.name}"][data-excl]`).forEach(x => x.checked = false);
+    }
+    syncSurvey();
+  });
+  function val(name){ const c = formEl.querySelector(`input[name="${name}"]:checked`); return c ? c.value : ''; }
+  function test(cond){
+    return cond.split('&').every(part => {
+      const neg = part.includes('!=');
+      const [k, v] = part.split(neg ? '!=' : '=');
+      const cur = val(k);
+      if (!cur) return false;
+      const hit = v.split('|').includes(cur);
+      return neg ? !hit : hit;
+    });
   }
-  document.querySelectorAll('input[name=pet]').forEach(r => r.addEventListener('change', syncPetQ));
-  syncPetQ();
+  function syncSurvey(){
+    const noPet = val('pet') === '반려동물 없음';
+    formEl.querySelectorAll('.pet-only').forEach(el => { el.hidden = noPet; if (noPet) el.querySelector('input').checked = false; });
+    const ct = document.getElementById('communityText'); if (ct) ct.textContent = noPet ? '뷰티 커뮤니티·SNS' : '반려인 카페·커뮤니티·SNS';
+    formEl.querySelectorAll('[data-when]').forEach(el => {
+      const show = test(el.dataset.when);
+      el.hidden = !show;
+      if (!show) el.querySelectorAll('input').forEach(x => x.checked = false);
+    });
+    let n = 0;
+    formEl.querySelectorAll('fieldset').forEach(f => { const q = f.querySelector('.qn'); if (q && !f.hidden) q.textContent = ++n; });
+  }
+  window.__syncSurvey = syncSurvey;
+  syncSurvey();
 
   const form = document.getElementById('surveyForm');
   const msg = document.getElementById('formMsg');
@@ -839,24 +970,21 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
     const email = (fd.get('email') || '').toString().trim();
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ msg.textContent = '이메일 주소 형식을 확인해 주세요.'; return; }
     if (email && !fd.get('consent')){ msg.textContent = '이메일을 남기시려면 수집·이용 동의에 체크해 주세요.'; return; }
-    const used = fd.get('used');
-    const data = {
-      pet: fd.get('pet'), usedApp: used,
-      ease: used === '네' && fd.get('ease') ? Number(fd.get('ease')) : null,
-      check: fd.getAll('check'), want: fd.getAll('want'), worry: fd.getAll('worry'),
-      comment: (fd.get('comment') || '').toString().slice(0,1000),
-      email: email || null, consent: !!fd.get('consent'),
-      fromApp: location.hash === '#from-app',
-      submittedAt: new Date().toISOString()
-    };
+    const data = { fromApp: location.hash === '#from-app', submittedAt: new Date().toISOString() };
+    ['pet','bought','found','checked','freq','method','trigger','hard','never','claim','contact','change','changed','decide','spend','age'].forEach(k => {
+      const v = fd.getAll(k); data[k] = v.length > 1 ? v : (v[0] || '');
+    });
+    data.comment = (fd.get('comment') || '').toString().slice(0,1000);
+    data.email = email || null; data.consent = !!fd.get('consent');
     const btn = document.getElementById('submitBtn'); btn.disabled = true; btn.textContent = '보내는 중…';
+    const body = new URLSearchParams();
+    Object.keys(F).forEach(k => {
+      let v = data[k];
+      if (Array.isArray(v)) v = v.join(', ');
+      if (typeof v === 'boolean') v = v ? 'Y' : 'N';
+      body.append('entry.' + F[k], v == null ? '' : String(v));
+    });
     try {
-      const body = new URLSearchParams();
-      body.append(F.pet, data.pet || ''); body.append(F.usedApp, data.usedApp || '');
-      body.append(F.ease, data.ease == null ? '' : String(data.ease));
-      body.append(F.check, data.check.join(', ')); body.append(F.want, data.want.join(', ')); body.append(F.worry, data.worry.join(', '));
-      body.append(F.comment, data.comment); body.append(F.email, data.email || '');
-      body.append(F.consent, data.consent ? 'Y' : 'N'); body.append(F.fromApp, data.fromApp ? 'Y' : 'N');
       await fetch(FORM_URL, {method:'POST', mode:'no-cors', body});
     } catch (err) {
       btn.disabled = false; btn.textContent = '설문 보내기';
