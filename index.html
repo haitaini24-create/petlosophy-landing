@@ -1283,10 +1283,10 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
     try {
       await fetch(FORM_URL, {method:'POST', mode:'no-cors', body});
     } catch (err) {
-      btn.disabled = false; btn.textContent = '설문 보내고 30% 쿠폰 받기';
+      btn.disabled = false; btn.textContent = '설문 보내고 오픈 혜택 받기';
       msg.textContent = '인터넷 연결을 확인하고 다시 보내주세요.'; return;
     }
-    btn.disabled = false; btn.textContent = '설문 보내고 30% 쿠폰 받기';
+    btn.disabled = false; btn.textContent = '설문 보내고 오픈 혜택 받기';
     form.hidden = true;
     const th = document.getElementById('thanks'); th.hidden = false;
     try { localStorage.setItem('pl_survey_done', '1'); } catch (e) {}
