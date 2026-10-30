@@ -943,7 +943,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
       <a href="#faq">자주 묻는 질문</a>
       <a href="#hero">개인정보처리방침</a>
     </div>
-    <p class="disclaimer">성분 확인 앱의 정보는 참고용이며, 수의학적 진단이나 개별 제품의 안전 보증을 대신하지 않아요. 아이에게 이상 증상이 보이면 동물병원에 문의해 주세요.<br>© 2026 PETLOSOPHY. All rights reserved.</p>
+    <p class="disclaimer">성분 확인 앱의 정보는 참고용이며, 수의학적 진단이나 개별 제품의 안전 보증을 대신하지 않아요. 아이에게 이상 증상이 보이면 동물병원에 문의해 주세요. 방문 통계를 위해 이 브라우저에 익명 방문자 ID를 저장하며, 이름·연락처 같은 개인정보는 설문에 직접 남기신 경우에만 수집해요.<br>© 2026 PETLOSOPHY. All rights reserved.</p>
   </div>
 </footer>
 
@@ -1093,7 +1093,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
     petcheck:'1302591213', petdepth:'1292325561', petmethod:'144652330', petnocheck:'1783547025',
     pf:'2143399413', pfwhat:'838627961', pfprice:'1524598200', pfrebuy:'1971144647', pfyes:'499566281', pfno:'769481381',
     know:'2048420456', intent:'1633720541', spend:'1794421606', age:'1641112334', comment:'2137961449', email:'769750614',
-    consent:'94733687', fromApp:'573634854'};
+    consent:'94733687', fromApp:'573634854', vid:'1142026457', dup:'1634258879'};
 
   // 설문: 단독 선택 보기, 조건부 질문, 반려인/비반려인 분기, 자동 번호
   const formEl = document.getElementById('surveyForm');
@@ -1142,7 +1142,8 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
     const email = (fd.get('email') || '').toString().trim();
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ msg.textContent = '이메일 주소 형식을 확인해 주세요.'; return; }
     if (email && !fd.get('consent')){ msg.textContent = '이메일을 남기시려면 수집·이용 동의에 체크해 주세요.'; return; }
-    const data = { fromApp: location.hash === '#from-app', submittedAt: new Date().toISOString() };
+    let doneBefore = 'N'; try { doneBefore = localStorage.getItem('pl_survey_done') ? 'Y' : 'N'; } catch (e) {}
+    const data = { fromApp: location.hash === '#from-app', submittedAt: new Date().toISOString(), vid: window.__plVid || '', dup: doneBefore };
     ['pet','bought','found','checked','freq','method','trigger','hard','never','claim','contact','petcheck','petdepth','petmethod','petnocheck','pf','pfwhat','pfprice','pfrebuy','pfyes','pfno','know','intent','spend','age'].forEach(k => {
       const v = fd.getAll(k); data[k] = v.length > 1 ? v : (v[0] || '');
     });
@@ -1165,8 +1166,46 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
     btn.disabled = false; btn.textContent = '설문 보내고 30% 쿠폰 받기';
     form.hidden = true;
     const th = document.getElementById('thanks'); th.hidden = false;
+    try { localStorage.setItem('pl_survey_done', '1'); } catch (e) {}
+    window.__plLog && window.__plLog('설문 제출', (data.pet || '') + (doneBefore === 'Y' ? ' · 재응답' : ''));
     th.scrollIntoView({block:'center'});
   });
+})();
+</script>
+<script>
+/* 방문·앱 이동·설문 기록 → 'PETLOSOPHY 방문 기록 (랜딩)' 구글 설문지 → 시트 */
+(() => {
+  const LOG = 'https://docs.google.com/forms/d/e/1FAIpQLSdlLtK4ylfcFv0FWkx5NcqH8LZPCxYsEA6pG9zoxBhvEkFg0g/formResponse';
+  const E = {vid:'1265228959', ev:'1142484118', detail:'841245425', ref:'1338314992', dev:'1189810092', first:'1741849833'};
+  let vid = '', first = 'N';
+  try {
+    vid = localStorage.getItem('pl_vid');
+    if (!vid) { vid = (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2)); localStorage.setItem('pl_vid', vid); first = 'Y'; }
+  } catch (e) { vid = 'anon-' + Math.random().toString(36).slice(2, 10); }
+  window.__plVid = vid;
+  const qs = new URLSearchParams(location.search);
+  let src = [qs.get('utm_source'), qs.get('utm_medium'), qs.get('utm_campaign')].filter(Boolean).join(' / ');
+  if (!src) { try { src = document.referrer ? new URL(document.referrer).hostname : '직접 방문'; } catch (e) { src = '알 수 없음'; } }
+  const dev = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? '모바일' : 'PC';
+  function log(ev, detail){
+    const b = new URLSearchParams();
+    b.append('entry.' + E.vid, vid); b.append('entry.' + E.ev, ev); b.append('entry.' + E.detail, detail || '');
+    b.append('entry.' + E.ref, src); b.append('entry.' + E.dev, dev); b.append('entry.' + E.first, first);
+    try { fetch(LOG, {method:'POST', mode:'no-cors', body:b, keepalive:true}); } catch (e) {}
+  }
+  window.__plLog = log;
+  let seen = false; try { seen = !!sessionStorage.getItem('pl_s'); sessionStorage.setItem('pl_s', '1'); } catch (e) {}
+  if (!seen) log('방문', location.hash || '/');
+  const where = el => { const sec = el.closest('section, header, footer, .mbar, .modal, .thanks'); return sec ? (sec.id || sec.className.split(' ')[0]) : 'page'; };
+  document.querySelectorAll('a[href*="app.petlosophy.co.kr"]').forEach(a => {
+    try { const u = new URL(a.href); u.searchParams.set('utm_source', 'landing'); u.searchParams.set('utm_content', where(a)); a.href = u.toString(); } catch (e) {}
+  });
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href*="app.petlosophy.co.kr"]');
+    if (a) log('앱 이동', where(a) + ' · ' + a.textContent.trim().replace(/\s+/g, ' ').slice(0, 30));
+    if (e.target.closest('[data-open-qr]')) log('QR 열기', where(e.target));
+  }, true);
+  if (location.hash === '#from-app') log('앱에서 설문 진입', '');
 })();
 </script>
 </body>
