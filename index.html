@@ -614,7 +614,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
         </div>
       </fieldset>
       <fieldset>
-        <legend><span class="qn"></span>최근 6개월 동안, 내 피부를 위해 화장품의 전성분을 직접 찾아본 적이 있나요?</legend>
+        <legend><span class="qn"></span>최근 6개월 동안, <span data-q-pet hidden>아이들을 위해</span><span data-q-nopet>내 피부를 위해</span> 화장품의 전성분을 직접 찾아본 적이 있나요?</legend>
         <div class="opts">
           <label class="opt opt-radio"><input type="radio" name="freq" id="freq-0" value="거의 매번"><span><b>살 때마다 거의 매번</b></span></label>
           <label class="opt opt-radio"><input type="radio" name="freq" id="freq-1" value="가끔"><span><b>가끔</b></span></label>
@@ -623,17 +623,28 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
         </div>
       </fieldset>
       <fieldset data-when="freq!=없음">
-        <legend><span class="qn"></span>전성분은 주로 어떤 방법으로 확인하셨나요?<small>여러 개 골라도 돼요</small></legend>
+        <legend><span class="qn"></span>어떤 방법으로 찾아보셨나요?<small>여러 개 골라도 돼요</small></legend>
         <div class="opts">
           <label class="opt"><input type="checkbox" name="method" id="method-0" value="검색창 검색"><span><b>검색창에 검색</b><small>네이버·구글</small></span></label>
           <label class="opt"><input type="checkbox" name="method" id="method-1" value="사진 찍어 물어보기"><span><b>사진 찍어 물어보기</b><small>구글 렌즈·AI에 사진 올리기</small></span></label>
           <label class="opt"><input type="checkbox" name="method" id="method-2" value="AI에게 글로 질문"><span><b>AI에게 글로 질문</b><small>챗GPT·제미나이 등</small></span></label>
           <label class="opt"><input type="checkbox" name="method" id="method-3" value="성분 분석 앱"><span><b>화장품 성분 분석 앱</b></span></label>
-          <label class="opt"><input type="checkbox" name="method" id="method-4" value="커뮤니티·SNS"><span><b>뷰티 커뮤니티·SNS</b></span></label>
-          <label class="opt"><input type="checkbox" name="method" id="method-5" value="제품 뒷면만 읽음"><span><b>제품 뒷면 표기만 읽어봐요</b></span></label>
+          <label class="opt nopet-only"><input type="checkbox" name="method" id="method-4" value="뷰티 커뮤니티·SNS"><span><b>뷰티 커뮤니티·SNS</b></span></label>
+          <label class="opt pet-only"><input type="checkbox" name="method" id="method-5" value="반려인 커뮤니티·SNS"><span><b>반려인 카페·커뮤니티·SNS</b></span></label>
+          <label class="opt pet-only"><input type="checkbox" name="method" id="method-6" value="수의사·동물병원"><span><b>수의사·동물병원에 문의</b></span></label>
+          <label class="opt"><input type="checkbox" name="method" id="method-7" value="제품 뒷면만 읽음"><span><b>제품 뒷면 표기만 읽어봐요</b></span></label>
         </div>
       </fieldset>
-      <fieldset data-when="freq!=없음">
+      <fieldset data-when="freq!=없음&pet!=반려동물 없음">
+        <legend><span class="qn"></span>아이를 위해 성분을 어디까지 확인하나요?</legend>
+        <div class="opts opts-1">
+          <label class="opt opt-radio"><input type="radio" name="petdepth" id="petdepth-0" value="전성분 하나하나"><span><b>전성분을 하나하나 찾아봐요</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="petdepth" id="petdepth-1" value="아는 위험 성분만"><span><b>들어본 위험 성분이 있는지만 봐요</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="petdepth" id="petdepth-2" value="향 성분 위주"><span><b>향료·에센셜 오일 위주로 봐요</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="petdepth" id="petdepth-3" value="펫 안전 표시만"><span><b>‘펫 안전’, ‘반려동물 친화’ 같은 표시만 봐요</b></span></label>
+        </div>
+      </fieldset>
+      <fieldset data-when="freq!=없음&pet=반려동물 없음">
         <legend><span class="qn"></span>가장 최근에 전성분을 찾아본 이유는 무엇이었나요?</legend>
         <div class="opts">
           <label class="opt opt-radio"><input type="radio" name="trigger" id="trigger-0" value="피부 트러블·자극"><span><b>피부 트러블·자극이 생겨서</b></span></label>
@@ -654,13 +665,23 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
           <label class="opt opt-radio opt-wide"><input type="radio" name="hard" id="hard-4" value="어렵지 않음"><span><b>특별히 어렵지 않았어요</b></span></label>
         </div>
       </fieldset>
-      <fieldset data-when="freq=없음">
+      <fieldset data-when="freq=없음&pet=반려동물 없음">
         <legend><span class="qn"></span>전성분을 찾아보지 않은 가장 큰 이유는 무엇인가요?</legend>
         <div class="opts">
           <label class="opt opt-radio"><input type="radio" name="never" id="never-0" value="필요를 못 느낌"><span><b>필요하다고 느낀 적이 없어요</b></span></label>
           <label class="opt opt-radio"><input type="radio" name="never" id="never-1" value="봐도 모름"><span><b>봐도 무슨 뜻인지 몰라서</b></span></label>
           <label class="opt opt-radio"><input type="radio" name="never" id="never-2" value="번거로움"><span><b>시간이 없고 번거로워서</b></span></label>
           <label class="opt opt-radio"><input type="radio" name="never" id="never-3" value="브랜드·리뷰 신뢰"><span><b>브랜드나 리뷰를 믿어서</b></span></label>
+        </div>
+      </fieldset>
+      <fieldset data-when="freq=없음&pet!=반려동물 없음">
+        <legend><span class="qn"></span>아이를 위해 성분을 찾아보지 않은 가장 큰 이유는 무엇인가요?</legend>
+        <div class="opts opts-1">
+          <label class="opt opt-radio"><input type="radio" name="petnocheck" id="petnocheck-0" value="주의 성분을 몰랐음"><span><b>반려동물에게 주의가 필요한 성분이 있는 줄 몰랐어요</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="petnocheck" id="petnocheck-1" value="심하지 않다고 생각"><span><b>알지만, 일반 화장품 정도는 크게 해롭지 않다고 생각했어요</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="petnocheck" id="petnocheck-2" value="접촉만 조심하면 된다고 생각"><span><b>바르고 아이와 닿지만 않게 하면 된다고 생각했어요</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="petnocheck" id="petnocheck-3" value="확인 방법을 모름"><span><b>어떻게 확인해야 하는지 몰라서요</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="petnocheck" id="petnocheck-4" value="번거로움"><span><b>번거롭고 시간이 없어서요</b></span></label>
         </div>
       </fieldset>
       <fieldset>
@@ -681,44 +702,6 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
           <label class="opt"><input type="checkbox" name="contact" id="contact-2" value="향 공간에 함께 있음"><span><b>향수·디퓨저를 쓴 공간에 아이가 함께 있었어요</b></span></label>
           <label class="opt"><input type="checkbox" name="contact" id="contact-3" value="제품을 물거나 먹음"><span><b>아이가 화장품이나 용기를 물거나 먹었어요</b></span></label>
           <label class="opt"><input type="checkbox" name="contact" id="contact-4" value="기억나는 일 없음" data-excl><span><b>기억나는 일이 없어요</b></span></label>
-        </div>
-      </fieldset>
-      <fieldset data-when="pet!=반려동물 없음">
-        <legend><span class="qn"></span>내 화장품이나 향수를 살 때, 아이를 생각해서 성분을 확인하나요?</legend>
-        <div class="opts opts-1">
-          <label class="opt opt-radio"><input type="radio" name="petcheck" id="petcheck-0" value="항상"><span><b>거의 항상 확인해요</b></span></label>
-          <label class="opt opt-radio"><input type="radio" name="petcheck" id="petcheck-1" value="가끔"><span><b>가끔, 특히 신경 쓰이는 제품만 확인해요</b></span></label>
-          <label class="opt opt-radio"><input type="radio" name="petcheck" id="petcheck-2" value="안 함"><span><b>따로 확인하지 않아요</b></span></label>
-        </div>
-      </fieldset>
-      <fieldset data-when="petcheck=항상|가끔">
-        <legend><span class="qn"></span>아이를 위해 성분을 어디까지 확인하나요?</legend>
-        <div class="opts opts-1">
-          <label class="opt opt-radio"><input type="radio" name="petdepth" id="petdepth-0" value="전성분 하나하나"><span><b>전성분을 하나하나 찾아봐요</b></span></label>
-          <label class="opt opt-radio"><input type="radio" name="petdepth" id="petdepth-1" value="아는 위험 성분만"><span><b>들어본 위험 성분이 있는지만 봐요</b></span></label>
-          <label class="opt opt-radio"><input type="radio" name="petdepth" id="petdepth-2" value="향 성분 위주"><span><b>향료·에센셜 오일 위주로 봐요</b></span></label>
-          <label class="opt opt-radio"><input type="radio" name="petdepth" id="petdepth-3" value="펫 안전 표시만"><span><b>‘펫 안전’, ‘반려동물 친화’ 같은 표시만 봐요</b></span></label>
-        </div>
-      </fieldset>
-      <fieldset data-when="petcheck=항상|가끔">
-        <legend><span class="qn"></span>아이를 위한 성분 확인은 주로 어디서 하나요?<small>여러 개 골라도 돼요</small></legend>
-        <div class="opts">
-          <label class="opt"><input type="checkbox" name="petmethod" id="petmethod-0" value="검색창 검색"><span><b>검색창에 검색</b><small>네이버·구글</small></span></label>
-          <label class="opt"><input type="checkbox" name="petmethod" id="petmethod-1" value="사진 찍어 물어보기"><span><b>사진 찍어 물어보기</b><small>구글 렌즈·AI에 사진 올리기</small></span></label>
-          <label class="opt"><input type="checkbox" name="petmethod" id="petmethod-2" value="AI에게 글로 질문"><span><b>AI에게 글로 질문</b><small>챗GPT·제미나이 등</small></span></label>
-          <label class="opt"><input type="checkbox" name="petmethod" id="petmethod-3" value="성분 분석 앱"><span><b>화장품 성분 분석 앱</b></span></label>
-          <label class="opt"><input type="checkbox" name="petmethod" id="petmethod-4" value="반려인 커뮤니티·SNS"><span><b>반려인 카페·커뮤니티·SNS</b></span></label>
-          <label class="opt"><input type="checkbox" name="petmethod" id="petmethod-5" value="수의사·동물병원"><span><b>수의사·동물병원에 문의</b></span></label>
-        </div>
-      </fieldset>
-      <fieldset data-when="petcheck=안 함">
-        <legend><span class="qn"></span>아이를 위해 성분을 확인하지 않는 가장 큰 이유는 무엇인가요?</legend>
-        <div class="opts opts-1">
-          <label class="opt opt-radio"><input type="radio" name="petnocheck" id="petnocheck-0" value="주의 성분을 몰랐음"><span><b>반려동물에게 주의가 필요한 성분이 있는 줄 몰랐어요</b></span></label>
-          <label class="opt opt-radio"><input type="radio" name="petnocheck" id="petnocheck-1" value="심하지 않다고 생각"><span><b>알지만, 일반 화장품 정도는 크게 해롭지 않다고 생각했어요</b></span></label>
-          <label class="opt opt-radio"><input type="radio" name="petnocheck" id="petnocheck-2" value="접촉만 조심하면 된다고 생각"><span><b>바르고 아이와 닿지만 않게 하면 된다고 생각했어요</b></span></label>
-          <label class="opt opt-radio"><input type="radio" name="petnocheck" id="petnocheck-3" value="확인 방법을 모름"><span><b>어떻게 확인해야 하는지 몰라서요</b></span></label>
-          <label class="opt opt-radio"><input type="radio" name="petnocheck" id="petnocheck-4" value="번거로움"><span><b>번거롭고 시간이 없어서요</b></span></label>
         </div>
       </fieldset>
       <fieldset data-when="pet!=반려동물 없음">
@@ -1074,8 +1057,11 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
     });
   }
   function syncSurvey(){
-    const noPet = val('pet') === '반려동물 없음';
-    formEl.querySelectorAll('.pet-only').forEach(el => { el.hidden = noPet; if (noPet) el.querySelector('input').checked = false; });
+    const isPet = !!val('pet') && val('pet') !== '반려동물 없음';
+    formEl.querySelectorAll('.pet-only').forEach(el => { el.hidden = !isPet; if (!isPet) el.querySelector('input').checked = false; });
+    formEl.querySelectorAll('.nopet-only').forEach(el => { el.hidden = isPet; if (isPet) el.querySelector('input').checked = false; });
+    formEl.querySelectorAll('[data-q-pet]').forEach(el => el.hidden = !isPet);
+    formEl.querySelectorAll('[data-q-nopet]').forEach(el => el.hidden = isPet);
     const ct = document.getElementById('communityText'); if (ct) ct.textContent = noPet ? '뷰티 커뮤니티·SNS' : '반려인 카페·커뮤니티·SNS';
     formEl.querySelectorAll('[data-when]').forEach(el => {
       const show = test(el.dataset.when);
