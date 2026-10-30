@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="반려동물과 함께 사는 사람을 위한 뷰티 브랜드 PETLOSOPHY. 지금 쓰는 화장품이 강아지·고양이에게 괜찮은지 회원가입 없이 무료로 확인해 보세요.">
+<meta name="description" content="반려동물과 함께 사는 사람의 뷰티를 생각하는 PETLOSOPHY. 지금 쓰는 화장품이 강아지·고양이에게 괜찮은지 회원가입 없이 무료로 확인해 보세요.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="PETLOSOPHY | 반려인을 위한 뷰티">
 <meta property="og:description" content="나를 가꾸는 시간이, 너에게도 편안하도록. 내 화장품 성분을 강아지·고양이 기준으로 확인해 보세요.">
@@ -31,7 +31,7 @@
 [hidden]{display:none!important}
 html{scroll-behavior:smooth;scroll-padding-top:calc(var(--head) + 12px)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
-body{background:var(--ivory);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.7;word-break:keep-all;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--ivory);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.7;word-break:keep-all;-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--ivory)}
 a{color:inherit}
 img{display:block;max-width:100%}
@@ -203,24 +203,29 @@ section{padding-block:clamp(64px,9vw,112px)}
 .principle p{color:var(--muted);font-size:15px}
 @media (max-width:820px){.story-grid{grid-template-columns:1fr}.story-mark{aspect-ratio:auto;padding:40px 24px}.principles{grid-template-columns:1fr}}
 
-/* products */
-.products{background:var(--cream)}
-.prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.prod{background:var(--paper);border-radius:22px;overflow:hidden;display:grid;min-width:0}
-.prod-art{height:240px;display:flex;align-items:center;justify-content:center;gap:14px;background:linear-gradient(160deg,#EADCCB,#DCC8B3)}
-.tube{width:74px;height:170px;border-radius:14px 14px 8px 8px;background:linear-gradient(90deg,#efe3d4,#fbf6ef 45%,#e4d4c1);transform:rotate(-12deg);position:relative;box-shadow:0 14px 24px rgba(60,40,28,.18)}
-.tube::after{content:"";position:absolute;left:12px;right:12px;bottom:-16px;height:22px;border-radius:4px;background:var(--cocoa)}
-.tube i{position:absolute;inset:40px 0 auto;text-align:center;font:500 8px/1.6 var(--body);letter-spacing:.18em;color:var(--cocoa);font-style:normal}
-.bottle{width:52px;height:110px;border-radius:12px;background:linear-gradient(90deg,#efe3d4,#fbf6ef 45%,#e4d4c1);position:relative;box-shadow:0 12px 20px rgba(60,40,28,.16);display:grid;place-items:center;font:500 9px/1 var(--body);letter-spacing:.1em;color:var(--cocoa)}
-.bottle::before{content:"";position:absolute;top:-20px;left:12px;right:12px;height:22px;border-radius:5px 5px 2px 2px;background:var(--cocoa)}
-.bottle.tall{height:136px}
-.prod-body{padding:24px 26px 28px;display:grid;gap:8px}
-.prod-title{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.pill{font-size:12px;padding:5px 11px;border-radius:999px;border:1px solid var(--sand);color:var(--cocoa);white-space:nowrap}
-.prod-body p{color:var(--muted);font-size:15px}
-.prod-foot{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between}
-.prod-foot small{color:var(--muted);font-size:13px}
-@media (max-width:820px){.prod-grid{grid-template-columns:1fr}}
+/* select (펫 안전 셀렉트) */
+.select{background:var(--cream);overflow:hidden}
+.sel-head{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:flex-end;justify-content:space-between;margin-bottom:28px}
+.sel-head .sec-head{margin-bottom:0}
+.sel-nav{display:flex;gap:8px}
+.sel-nav button{width:44px;height:44px;border-radius:50%;border:1px solid var(--sand);background:var(--paper);color:var(--cocoa);cursor:pointer;display:grid;place-items:center}
+.sel-nav button:hover{background:var(--sand-soft)}
+.sel-nav svg{width:18px;height:18px}
+.sel-track{display:flex;gap:16px;overflow-x:auto;scrollbar-width:none;padding:4px 0 8px;-webkit-overflow-scrolling:touch;cursor:grab}
+.sel-track::-webkit-scrollbar{display:none}
+.sel-card{flex:0 0 220px;background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden;text-decoration:none;color:inherit;display:grid;grid-template-rows:auto 1fr;cursor:pointer;text-align:left;padding:0;font:inherit;transition:transform .2s,box-shadow .2s}
+.sel-card:hover{transform:translateY(-3px);box-shadow:0 12px 24px rgba(60,40,28,.10)}
+.sel-art{aspect-ratio:1/1;background:linear-gradient(160deg,#EFE4D6,#E2D0BC);display:grid;place-items:center;position:relative}
+.sel-art svg{width:42%;height:42%;color:var(--cocoa);opacity:.8}
+.sel-art img{width:100%;height:100%;object-fit:cover}
+.sel-badge{position:absolute;left:12px;top:12px;font-size:11.5px;font-weight:500;padding:4px 10px;border-radius:999px;background:rgba(255,253,249,.9);color:var(--cocoa);border:1px solid var(--sand)}
+.sel-body{padding:16px 18px 18px;display:grid;gap:4px;align-content:start}
+.sel-body small{font-size:12.5px;color:var(--muted);letter-spacing:.04em}
+.sel-body b{font-family:var(--display);font-size:17px;color:var(--ink);font-weight:700}
+.sel-body span{font-size:13.5px;color:var(--muted);line-height:1.55}
+.sel-foot{margin-top:24px;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between}
+.sel-foot small{color:var(--muted);font-size:13px;max-width:44em}
+@media (max-width:820px){.sel-card{flex-basis:180px}.sel-nav{display:none}}
 
 /* survey */
 .survey-shell{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(28px,5vw,72px);align-items:start}
@@ -340,6 +345,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
       <a href="#story">브랜드 이야기</a>
       <a href="#check">30초 체험</a>
       <a href="#app">성분 확인 앱</a>
+      <a href="#select">펫 안전 셀렉트</a>
       <a href="#survey">설문 참여</a>
       <a href="#faq">자주 묻는 질문</a>
     </nav>
@@ -358,7 +364,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
     <div class="hero-text">
       <span class="eyebrow">반려인을 위한 뷰티</span>
       <h1>나를 가꾸는 시간이,<br>너에게도 편안하도록.</h1>
-      <p class="lead">PETLOSOPHY는 반려동물과 함께 사는 사람을 위한 뷰티 브랜드예요. 지금 쓰는 화장품이 강아지·고양이에게 괜찮은지, 먼저 확인해 보세요.</p>
+      <p class="lead">PETLOSOPHY는 반려동물과 함께 사는 사람의 뷰티를 생각해요. 지금 쓰는 화장품이 강아지·고양이에게 괜찮은지, 먼저 확인해 보세요.</p>
       <div class="hero-ctas">
         <a class="btn btn-main" href="https://app.petlosophy.co.kr/app/" target="_blank" rel="noopener">내 화장품 확인하기
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
@@ -425,7 +431,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
         <div class="letter">
           <p>고양이와 함께 사는 집사로서, 핸드크림 하나, 바디로션 하나, 향수 하나를 고를 때도 마음이 편하지 않았어요. 성분표를 읽어봐도 확신이 서지 않았고, 좋아하는 제품을 마음껏 쓰지 못했죠.</p>
           <p>내가 바르는 것은 나에게서 끝나지 않아요. 같은 공간에서 숨 쉬고 체온을 나누는 아이에게도 닿으니까요.</p>
-          <p>그렇다고 함께 산다는 이유로 내 취향을 포기할 필요는 없다고 생각해요. 처음부터 함께 사는 생명까지 생각하고 만들면 되니까요. 그게 PETLOSOPHY가 만드는 뷰티예요.</p>
+          <p>그렇다고 함께 산다는 이유로 내 취향을 포기할 필요는 없다고 생각해요. 처음부터 함께 사는 생명까지 생각하고 고르면 되니까요. 그 기준을 세우고, 기준을 통과한 제품을 한곳에 모아 보여드리는 것. 그게 PETLOSOPHY가 하려는 일이에요.</p>
         </div>
         <p class="sign">고양이와 함께 사는 PETLOSOPHY 창업자</p>
       </div>
@@ -439,7 +445,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
       <div class="principle">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/></svg>
         <h3>바른 뒤까지</h3>
-        <p>손과 피부, 옷에 남아 아이에게 닿는 순간까지 생각하며 만들어요.</p>
+        <p>손과 피부, 옷에 남아 아이에게 닿는 순간까지 생각하며 골라요.</p>
       </div>
       <div class="principle">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
@@ -559,7 +565,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
       </div>
       <div class="app-ctas">
         <a class="btn btn-cream" href="https://app.petlosophy.co.kr/app/" target="_blank" rel="noopener">앱에서 확인하기</a>
-        <a class="btn btn-ghost-dark" href="#survey">설문 참여하고 30% 쿠폰 받기</a>
+        <a class="btn btn-ghost-dark" href="#survey">설문 참여하고 오픈 혜택 받기</a>
       </div>
       <p class="app-note">참고용 정보이며, 수의학적 진단이나 제품의 안전 보증을 대신하지 않아요.</p>
     </div>
@@ -574,36 +580,6 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
   </div>
 </section>
 
-<!-- 6. products -->
-<section class="products" id="products">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">준비 중인 제품</span>
-      <h2>곧, 매일 쓰는 아름다움으로.</h2>
-    </div>
-    <div class="prod-grid">
-      <article class="prod">
-        <div class="prod-art" aria-hidden="true"><div class="tube"><i>PETLOSOPHY<br>HAND</i></div></div>
-        <div class="prod-body">
-          <div class="prod-title"><h3>Hand &amp; Skin</h3><span class="pill">준비 중</span></div>
-          <p>아이와 가장 자주 닿는 손부터 시작해요. 핸드크림을 시작으로 바디·스킨케어를 준비하고 있어요.</p>
-        </div>
-      </article>
-      <article class="prod">
-        <div class="prod-art" aria-hidden="true"><div class="bottle">TOP</div><div class="bottle tall">MIDDLE</div><div class="bottle">BASE</div></div>
-        <div class="prod-body">
-          <div class="prod-title"><h3>Modular Fragrance</h3><span class="pill">준비 중</span></div>
-          <p>시트러스처럼 모두가 좋아하는 향을, 주의 성분 없이 최대한 가깝게 구현하고 있어요. 좋아하는 향을 내 취향대로 조합하는 나만의 향이에요.</p>
-        </div>
-      </article>
-    </div>
-    <div class="prod-foot">
-      <small>이미지는 콘셉트예요. 제형과 용기, 출시 일정은 제품화 과정에서 확정돼요.</small>
-      <a class="btn btn-main" href="#survey">출시 소식·30% 쿠폰 받기</a>
-    </div>
-  </div>
-</section>
-
 <!-- 7. survey -->
 <section id="survey">
   <div class="wrap survey-shell">
@@ -613,13 +589,13 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
         <span>앱에서 결과를 확인하고 오셨군요. 써본 느낌을 1분만 들려주세요.</span>
       </div>
       <div class="sec-head" style="margin-bottom:0">
-        <span class="eyebrow">3분 설문 · 30% 쿠폰</span>
+        <span class="eyebrow">3분 설문 · 오픈 혜택</span>
         <h2>당신의 뷰티 습관을<br>들려주세요.</h2>
-        <p class="lead">평소 화장품을 어떻게 고르는지 들려주세요. 참여해주신 분께 첫 구매 30% 할인 쿠폰을 드려요.</p>
+        <p class="lead">평소 화장품을 어디서, 어떻게 고르고 사는지 들려주세요. 반려인을 위한 펫 안전 뷰티 셀렉트숍을 준비하는 데 소중히 쓸게요.</p>
       </div>
       <div class="perk">
         <img src="sophie.jpg" alt="">
-        <p><b>참여 혜택</b>출시 소식을 가장 먼저 알려드리고, <strong style="color:var(--cocoa)">첫 구매 30% 할인 쿠폰</strong>도 드려요.</p>
+        <p><b>참여 혜택</b>PETLOSOPHY 셀렉트 오픈 소식을 가장 먼저 알려드리고, <strong style="color:var(--cocoa)">오픈 기념 혜택</strong>도 보내드려요.</p>
       </div>
       <p style="font-size:14px;color:var(--muted)">아직 앱을 안 써보셨나요? <a href="https://app.petlosophy.co.kr/app/" target="_blank" rel="noopener" style="color:var(--cocoa);font-weight:500">먼저 써보고 오기</a></p>
     </aside>
@@ -659,6 +635,20 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
           <label class="opt opt-radio"><input type="radio" name="found" id="found-3" value="광고"><span><b>광고를 보고</b></span></label>
           <label class="opt opt-radio"><input type="radio" name="found" id="found-4" value="매장"><span><b>매장에서 보고</b></span></label>
           <label class="opt opt-radio"><input type="radio" name="found" id="found-5" value="검색·리뷰 비교"><span><b>직접 검색하고 리뷰를 비교해서</b></span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend><span class="qn"></span>화장품은 주로 어디서 사나요?<small>자주 이용하는 곳을 모두</small></legend>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="where" id="where-0" value="H&B 매장"><span><b>올리브영 등 H&B 매장</b></span></label>
+          <label class="opt"><input type="checkbox" name="where" id="where-1" value="H&B 온라인몰"><span><b>올리브영 등 H&B 온라인몰·앱</b></span></label>
+          <label class="opt"><input type="checkbox" name="where" id="where-2" value="쿠팡"><span><b>쿠팡</b></span></label>
+          <label class="opt"><input type="checkbox" name="where" id="where-3" value="네이버 쇼핑"><span><b>네이버 쇼핑</b><small>스마트스토어 포함</small></span></label>
+          <label class="opt"><input type="checkbox" name="where" id="where-4" value="브랜드 공식몰"><span><b>브랜드 공식몰</b></span></label>
+          <label class="opt"><input type="checkbox" name="where" id="where-5" value="패션·라이프 앱"><span><b>패션·라이프 앱</b><small>무신사·29CM·W컨셉 등</small></span></label>
+          <label class="opt"><input type="checkbox" name="where" id="where-6" value="컬리 등 장보기 앱"><span><b>컬리 등 장보기 앱</b></span></label>
+          <label class="opt"><input type="checkbox" name="where" id="where-7" value="백화점·면세점"><span><b>백화점·면세점</b></span></label>
+          <label class="opt opt-wide"><input type="checkbox" name="where" id="where-8" value="해외 직구"><span><b>해외 직구</b></span></label>
         </div>
       </fieldset>
       <fieldset>
@@ -754,6 +744,18 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
         </div>
       </fieldset>
       <p class="q-sec" data-when="pet!=반려동물 없음">반려 생활 속 뷰티</p>
+      <fieldset data-when="pet!=반려동물 없음">
+        <legend><span class="qn"></span>반려동물 용품은 주로 어디서 사나요?<small>자주 이용하는 곳을 모두</small></legend>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="petwhere" id="petwhere-0" value="쿠팡"><span><b>쿠팡</b></span></label>
+          <label class="opt"><input type="checkbox" name="petwhere" id="petwhere-1" value="반려동물 전문몰"><span><b>반려동물 전문몰</b><small>펫프렌즈·어바웃펫 등</small></span></label>
+          <label class="opt"><input type="checkbox" name="petwhere" id="petwhere-2" value="네이버 쇼핑"><span><b>네이버 쇼핑</b><small>스마트스토어 포함</small></span></label>
+          <label class="opt"><input type="checkbox" name="petwhere" id="petwhere-3" value="동물병원"><span><b>동물병원</b></span></label>
+          <label class="opt"><input type="checkbox" name="petwhere" id="petwhere-4" value="오프라인 펫숍"><span><b>오프라인 펫숍</b></span></label>
+          <label class="opt"><input type="checkbox" name="petwhere" id="petwhere-5" value="대형마트·창고형 매장"><span><b>대형마트·창고형 매장</b></span></label>
+          <label class="opt opt-wide"><input type="checkbox" name="petwhere" id="petwhere-6" value="해외 직구"><span><b>해외 직구</b></span></label>
+        </div>
+      </fieldset>
       <fieldset data-when="pet!=반려동물 없음">
         <legend><span class="qn"></span>최근 한 달 사이 있었던 일을 모두 골라주세요.<small>여러 개 골라도 돼요</small></legend>
         <div class="opts opts-1">
@@ -889,20 +891,20 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
         <textarea id="comment" name="comment" rows="3" maxlength="1000" placeholder="화장품을 고를 때 불편했던 점이나 바라는 점을 자유롭게 적어주세요."></textarea>
       </fieldset>
       <fieldset>
-        <legend><span class="qn"></span>출시 소식과 30% 할인 쿠폰을 받을 이메일<small>선택</small></legend>
+        <legend><span class="qn"></span>오픈 소식과 혜택을 받을 이메일<small>선택</small></legend>
         <input type="email" id="email" name="email" placeholder="name@example.com" autocomplete="email">
-        <label class="consent"><input type="checkbox" id="consent" name="consent">출시 소식 안내와 할인 쿠폰 발송을 위해 이메일을 수집·이용하는 데 동의해요. (보관 기간: 동의 철회 또는 안내 종료 시까지)</label>
+        <label class="consent"><input type="checkbox" id="consent" name="consent">PETLOSOPHY 셀렉트 오픈 소식과 혜택 안내를 위해 이메일을 수집·이용하는 데 동의해요. (보관 기간: 동의 철회 또는 안내 종료 시까지)</label>
       </fieldset>
       <div class="form-foot">
         <p class="form-msg" id="formMsg" role="alert"></p>
-        <button class="btn btn-main" type="submit" id="submitBtn">설문 보내고 30% 쿠폰 받기</button>
+        <button class="btn btn-main" type="submit" id="submitBtn">설문 보내고 오픈 혜택 받기</button>
       </div>
 
     </form>
     <div class="form thanks" id="thanks" hidden>
       <img src="sophie.jpg" alt="">
       <h3>고마워요, 잘 받았어요.</h3>
-      <p>보내주신 이야기는 제품을 만드는 데 소중히 쓸게요.<br>이메일을 남겨주셨다면, 출시에 맞춰 첫 구매 30% 할인 쿠폰을 보내드릴게요.</p>
+      <p>보내주신 이야기는 셀렉트숍을 준비하는 데 소중히 쓸게요.<br>이메일을 남겨주셨다면, 오픈에 맞춰 오픈 기념 혜택을 보내드릴게요.</p>
       <a class="btn btn-line" href="https://app.petlosophy.co.kr/app/" target="_blank" rel="noopener">다른 제품도 확인해보기</a>
     </div>
   </div>
@@ -916,14 +918,53 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
       <h2>꼼꼼한 마음에 답할게요.</h2>
     </div>
     <div class="faq-list">
-      <details><summary>반려동물에게 바르는 제품인가요?</summary><p>아니요, 사람이 쓰는 뷰티 제품이에요. 다만 바른 뒤 손과 피부, 옷을 통해 아이에게 닿는 순간, 그리고 향이 공기 중에 퍼져 아이가 들이마시는 것까지 고려해서 만들어요.</p></details>
-      <details><summary>천연·비건 화장품이면 괜찮지 않나요?</summary><p>많은 분이 그렇게 알고 계세요. 하지만 ‘천연’, ‘비건’은 원료가 어디서 왔는지를 말할 뿐, 반려동물에게 안전하다는 뜻은 아니에요. 사람에게 순한 성분이 반려동물에게도 순한 건 아니에요. 아이에게 주의가 필요한 화장품 성분 중엔 오히려 식물에서 온 것이 많아요. 티트리, 유칼립투스, 페퍼민트, 레몬·오렌지 같은 시트러스 오일은 천연 성분이지만 반려동물, 특히 고양이에게는 주의가 필요할 수 있어요. 시트러스 향의 주성분인 리모넨(Limonene)과 리날룰(Linalool)도 마찬가지예요. 그래서 ‘천연’, ‘비건’이라는 말보다 전성분을 함께 살펴보는 게 좋아요.<br><br>그렇다고 좋아하는 향을 포기할 필요는 없어요. PETLOSOPHY는 이런 주의 성분은 빼고, 사람들이 사랑하는 그 향은 최대한 살리는 포뮬러를 개발하고 있어요. 내 취향도, 아이의 안전도 포기하지 않도록요.</p></details>
+      <details><summary>반려동물용 제품을 다루나요?</summary><p>아니요, 사람이 쓰는 뷰티 제품이에요. 다만 바른 뒤 손과 피부, 옷을 통해 아이에게 닿는 순간, 그리고 향이 공기 중에 퍼져 아이가 들이마시는 것까지 기준으로 봐요.</p></details>
+      <details><summary>천연·비건 화장품이면 괜찮지 않나요?</summary><p>많은 분이 그렇게 알고 계세요. 하지만 ‘천연’, ‘비건’은 원료가 어디서 왔는지를 말할 뿐, 반려동물에게 안전하다는 뜻은 아니에요. 사람에게 순한 성분이 반려동물에게도 순한 건 아니에요. 아이에게 주의가 필요한 화장품 성분 중엔 오히려 식물에서 온 것이 많아요. 티트리, 유칼립투스, 페퍼민트, 레몬·오렌지 같은 시트러스 오일은 천연 성분이지만 반려동물, 특히 고양이에게는 주의가 필요할 수 있어요. 시트러스 향의 주성분인 리모넨(Limonene)과 리날룰(Linalool)도 마찬가지예요. 그래서 ‘천연’, ‘비건’이라는 말보다 전성분을 함께 살펴보는 게 좋아요.<br><br>그렇다고 좋아하는 향을 포기할 필요는 없어요. 주의 성분 없이 만든 제품도 있으니까요. PETLOSOPHY는 그런 제품을 찾아 확인한 기준과 함께 소개하려 해요.</p></details>
       <details><summary>앱은 ‘펫 안전’을 어떻게 판단하나요?</summary><p>수의학 전문기관 자료를 바탕으로 구성한 ‘위험·주의 성분 블랙리스트 DB’를 기준으로 판독해요. 주의가 필요하지만 반려동물 대상 연구가 아직 부족한 성분은 ‘근거 제한’으로 따로 표시해요.</p></details>
       <details><summary>앱은 무료인가요? 회원가입이 필요한가요?</summary><p>무료이고, 회원가입 없이 바로 쓸 수 있어요. 인터넷 주소로 바로 열리고, 원하면 휴대폰 홈 화면에 추가해 앱처럼 쓸 수 있어요.</p></details>
-      <details><summary>제품은 어디서 만나볼 수 있나요?</summary><p>지금은 출시를 준비하고 있어요. 설문에 이메일을 남겨주시면 출시 소식을 가장 먼저 알려드리고, 첫 구매 30% 할인 쿠폰도 보내드려요.</p></details>
+      <details><summary>‘PETLOSOPHY 기준 통과’는 무슨 뜻인가요?</summary><p>앱과 같은 ‘위험·주의 성분 DB’로 제품의 전성분을 확인했을 때, 반려동물에게 주의가 필요한 성분이 없다는 뜻이에요. 성분 기준의 확인일 뿐 모든 반려동물에게 안전하다는 보증은 아니에요. 아이마다 체질이 다르니, 이상 증상이 보이면 동물병원에 문의해 주세요.</p></details>
+      <details><summary>PETLOSOPHY 셀렉트는 언제 열리나요?</summary><p>지금 PETLOSOPHY 기준으로 제품을 하나씩 확인하고 있어요. 설문에 이메일을 남겨주시면 오픈 소식과 오픈 기념 혜택을 가장 먼저 보내드려요.</p></details>
     </div>
   </div>
 </section>
+
+<!-- select: PETLOSOPHY 기준 통과 펫 안전 뷰티 -->
+<section class="select" id="select">
+  <div class="wrap">
+    <div class="sel-head">
+      <div class="sec-head">
+        <span class="eyebrow">PETLOSOPHY 셀렉트 · 오픈 준비 중</span>
+        <h2>기준을 통과한 뷰티만,<br>한곳에.</h2>
+        <p class="lead">반려동물에게 주의가 필요한 성분이 없는지, PETLOSOPHY 기준으로 전성분을 확인한 사람용 뷰티 제품을 모으고 있어요.</p>
+      </div>
+      <div class="sel-nav">
+        <button type="button" data-sel="-1" aria-label="이전 제품"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
+        <button type="button" data-sel="1" aria-label="다음 제품"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
+      </div>
+    </div>
+  </div>
+  <div class="wrap" style="padding-right:0;max-width:none;margin-left:max(0px,calc((100vw - var(--maxw, 1160px))/2))">
+    <div class="sel-track" id="selTrack" aria-label="PETLOSOPHY 셀렉트 제품 목록"></div>
+  </div>
+  <div class="wrap">
+    <div class="sel-foot">
+      <small>지금은 입점 심사 중인 카테고리를 먼저 보여드려요. 성분 확인을 마친 제품부터 차례로 공개할게요.</small>
+      <a class="btn btn-main" href="#survey">오픈 소식 받기</a>
+    </div>
+  </div>
+</section>
+
+<div class="modal" id="selModal" hidden role="dialog" aria-modal="true" aria-labelledby="selTitle">
+  <div class="modal-card">
+    <button class="x" type="button" data-close-sel aria-label="닫기">×</button>
+    <h3 id="selTitle">PETLOSOPHY 셀렉트, 오픈 준비 중이에요</h3>
+    <p><b id="selCat" style="color:var(--cocoa)"></b> 카테고리는 지금 PETLOSOPHY 기준으로 제품의 전성분을 확인하고 있어요. 오픈 소식을 받아보시겠어요?</p>
+    <div class="hero-ctas" style="justify-content:center;margin-top:18px">
+      <a class="btn btn-main" href="#survey" data-close-sel>오픈 소식 받기</a>
+      <a class="btn btn-line" href="https://app.petlosophy.co.kr/app/" target="_blank" rel="noopener">내 제품 먼저 확인하기</a>
+    </div>
+  </div>
+</div>
 
 <!-- 9. closing -->
 <section class="closing" style="background:var(--paper);border-top:1px solid var(--line)">
@@ -933,7 +974,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
     <p class="lead">가장 가까운 존재를 생각하는 마음에서 시작해요.</p>
     <div class="hero-ctas">
       <a class="btn btn-main" href="https://app.petlosophy.co.kr/app/" target="_blank" rel="noopener">내 화장품 확인하기</a>
-      <a class="btn btn-line" href="#survey">출시 소식 받기</a>
+      <a class="btn btn-line" href="#survey">오픈 소식 받기</a>
     </div>
   </div>
 </section>
@@ -949,6 +990,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
     </div>
     <div class="foot-links">
       <a href="https://app.petlosophy.co.kr/app/" target="_blank" rel="noopener">성분 확인 앱</a>
+      <a href="#select">펫 안전 셀렉트</a>
       <a href="#survey">설문 참여</a>
       <a href="#faq">자주 묻는 질문</a>
       <a href="#hero">개인정보처리방침</a>
@@ -959,7 +1001,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
 
 <div class="mbar">
   <a class="btn btn-main" href="https://app.petlosophy.co.kr/app/" target="_blank" rel="noopener">성분 확인하기</a>
-  <a class="btn btn-line" href="#survey" style="background:var(--paper)">설문하고 30% 쿠폰</a>
+  <a class="btn btn-line" href="#survey" style="background:var(--paper)">설문하고 오픈 혜택</a>
 </div>
 
 <div class="modal" id="qrModal" hidden role="dialog" aria-modal="true" aria-labelledby="qrTitle">
@@ -1069,6 +1111,76 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
 
   // QR modal
   const modal = document.getElementById('qrModal');
+  // PETLOSOPHY 셀렉트 롤링 — 제품이 정해지면 SELECT 배열만 바꾸면 돼요.
+  // {cat, name, brand, desc, img, url}  url이 있으면 그 링크로, 없으면 '오픈 준비 중' 안내가 열려요.
+  const ICON = {
+    hand:'<path d="M9 3h6l1 4H8z"/><path d="M8 7h8l-1 14H9z"/><path d="M10 12h4"/>',
+    lotion:'<path d="M10 2h4v3h-4zM12 5v2"/><path d="M8 9a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2z"/><path d="M14 2h3"/>',
+    perfume:'<path d="M10 2h4v3h-4z"/><rect x="5" y="7" width="14" height="14" rx="4"/><path d="M9 14h6"/>',
+    diffuser:'<path d="M8 12h8l1 9H7z"/><path d="M11 12 8 2M12 12V1M13 12l3-10"/>',
+    candle:'<rect x="6" y="9" width="12" height="12" rx="2"/><path d="M12 9V7"/><path d="M12 6c-1.2-1-1.2-2.6 0-4 1.2 1.4 1.2 3 0 4z"/>',
+    mist:'<path d="M9 8h6v13H9z"/><path d="M10 8V5h4v3M14 5h2"/><path d="M19 4h.01M20 6h.01M19 8h.01"/>',
+    hair:'<path d="M7 6h10l-1 15H8z"/><path d="M9 2h6v4H9z"/><path d="M10 12c1-1 3-1 4 0"/>',
+    lip:'<path d="M9 10h6v11H9z"/><path d="M10 10V5l4-2v7"/>'
+  };
+  const SELECT = [
+    {cat:'핸드크림', icon:'hand', desc:'아이를 가장 자주 만지는 손부터'},
+    {cat:'향수', icon:'perfume', desc:'좋아하는 향, 주의 성분 없이'},
+    {cat:'바디로션', icon:'lotion', desc:'안고 기대는 피부까지'},
+    {cat:'디퓨저', icon:'diffuser', desc:'아이와 같은 공기를 마시니까'},
+    {cat:'캔들', icon:'candle', desc:'함께 쉬는 저녁의 향'},
+    {cat:'섬유·룸 미스트', icon:'mist', desc:'옷과 이불에 남는 향까지'},
+    {cat:'헤어 케어', icon:'hair', desc:'얼굴을 맞대는 순간을 위해'},
+    {cat:'립밤', icon:'lip', desc:'뽀뽀하는 입술도'}
+  ];
+  const track = document.getElementById('selTrack');
+  const selModal = document.getElementById('selModal');
+  if (track){
+    const card = p => {
+      const art = p.img ? `<img src="${p.img}" alt="${p.brand||''} ${p.name||p.cat}">` : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round">${ICON[p.icon]||ICON.hand}</svg>`;
+      const badge = p.url ? '기준 통과' : '입점 심사 중';
+      const tag = p.url ? 'a' : 'button';
+      const attr = p.url ? `href="${p.url}" target="_blank" rel="noopener"` : 'type="button"';
+      return `<${tag} class="sel-card" ${attr} data-cat="${p.cat}"><div class="sel-art">${art}<span class="sel-badge">${badge}</span></div><div class="sel-body"><small>${p.brand || '곧 공개'}</small><b>${p.name || p.cat}</b><span>${p.desc||''}</span></div></${tag}>`;
+    };
+    const html = SELECT.map(card).join('');
+    track.innerHTML = html + html; // 이어 붙여 끝없이 흐르게
+    track.querySelectorAll('.sel-card').forEach((c,i) => { if (i >= SELECT.length){ c.setAttribute('aria-hidden','true'); c.tabIndex = -1; } });
+    const openSel = cat => { document.getElementById('selCat').textContent = cat; selModal.hidden = false; selModal.querySelector('.x').focus(); };
+    track.addEventListener('click', e => {
+      const c = e.target.closest('.sel-card'); if (!c || dragged) return;
+      window.__plLog && window.__plLog('셀렉트 클릭', c.dataset.cat);
+      if (c.tagName === 'BUTTON') openSel(c.dataset.cat);
+    });
+    selModal.addEventListener('click', e => { if (e.target === selModal || e.target.closest('[data-close-sel]')) selModal.hidden = true; });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') selModal.hidden = true; });
+
+    // 자동 롤링 (마우스를 올리거나 터치하면 멈춤)
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let paused = false, resumeT, pos = 0, dragged = false;
+    const half = () => track.scrollWidth / 2;
+    const pause = () => { paused = true; clearTimeout(resumeT); };
+    const resume = (ms=2500) => { clearTimeout(resumeT); resumeT = setTimeout(() => { paused = false; pos = track.scrollLeft; }, ms); };
+    track.addEventListener('mouseenter', pause); track.addEventListener('mouseleave', () => resume(600));
+    track.addEventListener('touchstart', pause, {passive:true}); track.addEventListener('touchend', () => resume());
+    track.addEventListener('focusin', pause); track.addEventListener('focusout', () => resume(600));
+    // 마우스 드래그로 넘기기
+    let sx = 0, sl = 0, down = false;
+    track.addEventListener('mousedown', e => { down = true; dragged = false; sx = e.pageX; sl = track.scrollLeft; });
+    addEventListener('mouseup', () => { down = false; setTimeout(() => dragged = false, 0); });
+    track.addEventListener('mousemove', e => { if (!down) return; const dx = e.pageX - sx; if (Math.abs(dx) > 5) dragged = true; track.scrollLeft = sl - dx; });
+    track.addEventListener('scroll', () => { const h = half(); if (track.scrollLeft >= h) { track.scrollLeft -= h; pos = track.scrollLeft; } });
+    document.querySelectorAll('[data-sel]').forEach(b => b.addEventListener('click', () => {
+      pause(); const step = (track.querySelector('.sel-card').offsetWidth + 16) * +b.dataset.sel;
+      if (track.scrollLeft + step < 0) track.scrollLeft += half();
+      track.scrollBy({left: step, behavior: 'smooth'}); resume(3000);
+    }));
+    let vis = false;
+    new IntersectionObserver(es => { vis = es[0].isIntersecting; }).observe(track);
+    const tick = () => { if (!paused && vis && !reduce){ pos += 0.4; if (pos >= half()) pos -= half(); track.scrollLeft = pos; } requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  }
+
   const openQr = () => { modal.hidden = false; modal.querySelector('.x').focus(); };
   const closeQr = () => { modal.hidden = true; };
   document.querySelectorAll('[data-open-qr]').forEach(b => b.addEventListener('click', openQr));
@@ -1103,7 +1215,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
     petcheck:'1302591213', petdepth:'1292325561', petmethod:'144652330', petnocheck:'1783547025',
     pf:'2143399413', pfwhat:'838627961', pfprice:'1524598200', pfrebuy:'1971144647', pfyes:'499566281', pfno:'769481381',
     know:'2048420456', intent:'1633720541', spend:'1794421606', age:'1641112334', comment:'2137961449', email:'769750614',
-    consent:'94733687', fromApp:'573634854', vid:'1142026457', dup:'1634258879', pfbrand:'911051156', pfknow:'1864828134'};
+    consent:'94733687', fromApp:'573634854', vid:'1142026457', dup:'1634258879', pfbrand:'911051156', pfknow:'1864828134', where:'1665306345', petwhere:'689544814'};
 
   // 설문: 단독 선택 보기, 조건부 질문, 반려인/비반려인 분기, 자동 번호
   const formEl = document.getElementById('surveyForm');
@@ -1154,7 +1266,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
     if (email && !fd.get('consent')){ msg.textContent = '이메일을 남기시려면 수집·이용 동의에 체크해 주세요.'; return; }
     let doneBefore = 'N'; try { doneBefore = localStorage.getItem('pl_survey_done') ? 'Y' : 'N'; } catch (e) {}
     const data = { fromApp: location.hash === '#from-app', submittedAt: new Date().toISOString(), vid: window.__plVid || '', dup: doneBefore };
-    ['pet','bought','found','checked','freq','method','trigger','hard','never','claim','contact','petcheck','petdepth','petmethod','petnocheck','pf','pfwhat','pfprice','pfrebuy','pfyes','pfno','know','intent','spend','age'].forEach(k => {
+    ['pet','bought','found','where','petwhere','checked','freq','method','trigger','hard','never','claim','contact','petcheck','petdepth','petmethod','petnocheck','pf','pfwhat','pfprice','pfrebuy','pfyes','pfno','know','intent','spend','age'].forEach(k => {
       const v = fd.getAll(k); data[k] = v.length > 1 ? v : (v[0] || '');
     });
     data.comment = (fd.get('comment') || '').toString().slice(0,1000);
