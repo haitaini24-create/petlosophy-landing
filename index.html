@@ -239,8 +239,8 @@ legend small{color:var(--muted);font-weight:400;font-size:13px;margin-left:6px}
 .scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
 .scale .chip{text-align:center;padding:12px 0}
 .scale-ends{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
-textarea,input[type=email]{width:100%;border:1.5px solid var(--line);border-radius:var(--r-sm);background:var(--ivory);padding:14px 16px;font:400 15px/1.6 var(--body);color:var(--ink);resize:vertical}
-textarea:focus,input[type=email]:focus{outline:none;border-color:var(--cocoa)}
+textarea,input[type=email],input.txt{width:100%;border:1.5px solid var(--line);border-radius:var(--r-sm);background:var(--ivory);padding:14px 16px;font:400 15px/1.6 var(--body);color:var(--ink);resize:vertical}
+textarea:focus,input[type=email]:focus,input.txt:focus{outline:none;border-color:var(--cocoa)}
 .consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted)}
 .consent input{margin-top:4px;accent-color:var(--espresso);width:16px;height:16px;flex:none}
 .form-foot{display:grid;gap:12px}
@@ -764,7 +764,8 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
           <label class="opt"><input type="checkbox" name="contact" id="contact-4" value="기억나는 일 없음" data-excl><span><b>기억나는 일이 없어요</b></span></label>
         </div>
       </fieldset>
-      <fieldset data-when="pet!=반려동물 없음">
+      <p class="q-sec" data-when="pet=반려동물 없음">‘펫 프렌들리’ 제품</p>
+      <fieldset>
         <legend><span class="qn"></span>‘펫 프렌들리’, ‘반려동물 안심’ 같은 표시가 있는 사람용 뷰티 제품을 사본 적 있나요?<small>사람이 쓰는 핸드크림·향수·디퓨저 등 기준이에요</small></legend>
         <div class="opts opts-1">
           <label class="opt opt-radio"><input type="radio" name="pf" id="pf-0" value="산 적 있음"><span><b>네, 사본 적 있어요</b></span></label>
@@ -782,6 +783,10 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
           <label class="opt"><input type="checkbox" name="pfwhat" id="pfwhat-4" value="헤어 제품"><span><b>헤어 제품</b></span></label>
           <label class="opt"><input type="checkbox" name="pfwhat" id="pfwhat-5" value="기타"><span><b>기타</b></span></label>
         </div>
+      </fieldset>
+      <fieldset data-when="pf=산 적 있음">
+        <legend><span class="qn"></span>기억나는 브랜드나 제품 이름을 적어주세요.<small>선택 · 여러 개 적어도 돼요</small></legend>
+        <input type="text" class="txt" id="pfbrand" name="pfbrand" maxlength="200" placeholder="예: 브랜드명, 제품명 (기억나는 만큼만)">
       </fieldset>
       <fieldset data-when="pf=산 적 있음">
         <legend><span class="qn"></span>그 제품의 가격은 대략 얼마였나요?<small>가장 최근에 산 제품 기준</small></legend>
@@ -804,11 +809,12 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
       <fieldset data-when="pfrebuy=재구매함">
         <legend><span class="qn"></span>다시 산 가장 큰 이유는 무엇인가요?</legend>
         <div class="opts opts-1">
-          <label class="opt opt-radio"><input type="radio" name="pfyes" id="pfyes-0" value="아이 반응이 괜찮음"><span><b>써보니 아이가 괜찮아 보여서</b></span></label>
-          <label class="opt opt-radio"><input type="radio" name="pfyes" id="pfyes-1" value="사용감·향이 좋음"><span><b>사용감이나 향이 좋아서</b></span></label>
-          <label class="opt opt-radio"><input type="radio" name="pfyes" id="pfyes-2" value="성분 정보를 믿음"><span><b>성분 정보를 믿을 수 있어서</b></span></label>
-          <label class="opt opt-radio"><input type="radio" name="pfyes" id="pfyes-3" value="대안이 없음"><span><b>대신할 제품을 못 찾아서</b></span></label>
-          <label class="opt opt-radio"><input type="radio" name="pfyes" id="pfyes-4" value="가격이 적당"><span><b>가격이 적당해서</b></span></label>
+          <label class="opt opt-radio pet-only"><input type="radio" name="pfyes" id="pfyes-0" value="아이 반응이 괜찮음"><span><b>써보니 아이가 괜찮아 보여서</b></span></label>
+          <label class="opt opt-radio nopet-only"><input type="radio" name="pfyes" id="pfyes-1" value="피부에 순함"><span><b>써보니 피부에 순하게 느껴져서</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="pfyes" id="pfyes-2" value="사용감·향이 좋음"><span><b>사용감이나 향이 좋아서</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="pfyes" id="pfyes-3" value="성분 정보를 믿음"><span><b>성분 정보를 믿을 수 있어서</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="pfyes" id="pfyes-4" value="대안이 없음"><span><b>대신할 제품을 못 찾아서</b></span></label>
+          <label class="opt opt-radio"><input type="radio" name="pfyes" id="pfyes-5" value="가격이 적당"><span><b>가격이 적당해서</b></span></label>
         </div>
       </fieldset>
       <fieldset data-when="pfrebuy=재구매 안 함">
@@ -820,6 +826,10 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
           <label class="opt opt-radio"><input type="radio" name="pfno" id="pfno-3" value="차이를 못 느낌"><span><b>일반 제품과 차이를 못 느꼈어요</b></span></label>
           <label class="opt opt-radio"><input type="radio" name="pfno" id="pfno-4" value="구하기 어려움"><span><b>구하기 어려웠어요</b></span></label>
         </div>
+      </fieldset>
+      <fieldset data-when="pf=알지만 안 삼">
+        <legend><span class="qn"></span>혹시 알고 있는 ‘펫 안전’ 표시 화장품이 있나요?<small>사람이 쓰는 일반 화장품 기준 · 없으면 비워두셔도 돼요</small></legend>
+        <input type="text" class="txt" id="pfknow" name="pfknow" maxlength="200" placeholder="예: 브랜드명, 제품명">
       </fieldset>
       <fieldset data-when="pet!=반려동물 없음">
         <legend><span class="qn"></span>아래 성분들이 반려동물에게 이런 증상을 일으킬 수 있다는 걸 알고 계셨나요?</legend>
@@ -1093,7 +1103,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
     petcheck:'1302591213', petdepth:'1292325561', petmethod:'144652330', petnocheck:'1783547025',
     pf:'2143399413', pfwhat:'838627961', pfprice:'1524598200', pfrebuy:'1971144647', pfyes:'499566281', pfno:'769481381',
     know:'2048420456', intent:'1633720541', spend:'1794421606', age:'1641112334', comment:'2137961449', email:'769750614',
-    consent:'94733687', fromApp:'573634854', vid:'1142026457', dup:'1634258879'};
+    consent:'94733687', fromApp:'573634854', vid:'1142026457', dup:'1634258879', pfbrand:'911051156', pfknow:'1864828134'};
 
   // 설문: 단독 선택 보기, 조건부 질문, 반려인/비반려인 분기, 자동 번호
   const formEl = document.getElementById('surveyForm');
@@ -1148,6 +1158,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
       const v = fd.getAll(k); data[k] = v.length > 1 ? v : (v[0] || '');
     });
     data.comment = (fd.get('comment') || '').toString().slice(0,1000);
+    ['pfbrand','pfknow'].forEach(k => { const el = form.querySelector('[name="'+k+'"]'); data[k] = (el && !el.closest('fieldset').hidden) ? el.value.trim().slice(0,200) : ''; });
     data.email = email || null; data.consent = !!fd.get('consent');
     const btn = document.getElementById('submitBtn'); btn.disabled = true; btn.textContent = '보내는 중…';
     const body = new URLSearchParams();
