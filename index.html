@@ -1141,7 +1141,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
       const badge = p.url ? '기준 통과' : '입점 심사 중';
       const tag = p.url ? 'a' : 'button';
       const attr = p.url ? `href="${p.url}" target="_blank" rel="noopener"` : 'type="button"';
-      return `<${tag} class="sel-card" ${attr} data-cat="${p.cat}"><div class="sel-art">${art}<span class="sel-badge">${badge}</span></div><div class="sel-body"><small>${p.brand || '곧 공개'}</small><b>${p.name || p.cat}</b><span>${p.desc||''}</span></div></${tag}>`;
+      return `<${tag} class="sel-card" ${attr} data-scat="${p.cat}"><div class="sel-art">${art}<span class="sel-badge">${badge}</span></div><div class="sel-body"><small>${p.brand || '곧 공개'}</small><b>${p.name || p.cat}</b><span>${p.desc||''}</span></div></${tag}>`;
     };
     const html = SELECT.map(card).join('');
     track.innerHTML = html + html; // 이어 붙여 끝없이 흐르게
@@ -1149,8 +1149,8 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
     const openSel = cat => { document.getElementById('selCat').textContent = cat; selModal.hidden = false; selModal.querySelector('.x').focus(); };
     track.addEventListener('click', e => {
       const c = e.target.closest('.sel-card'); if (!c || dragged) return;
-      window.__plLog && window.__plLog('셀렉트 클릭', c.dataset.cat);
-      if (c.tagName === 'BUTTON') openSel(c.dataset.cat);
+      window.__plLog && window.__plLog('셀렉트 클릭', c.dataset.scat);
+      if (c.tagName === 'BUTTON') openSel(c.dataset.scat);
     });
     selModal.addEventListener('click', e => { if (e.target === selModal || e.target.closest('[data-close-sel]')) selModal.hidden = true; });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') selModal.hidden = true; });
