@@ -255,6 +255,11 @@ textarea:focus,input[type=email]:focus,input.txt:focus{outline:none;border-color
 .thanks img{width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:50% 15%;background:#857a72}
 .thanks p{color:var(--muted)}
 .thanks small{font-size:12px;color:var(--muted)}
+.pcode{width:100%;max-width:420px;margin-top:6px;padding:20px 20px 18px;border:1.5px dashed var(--sand);border-radius:var(--r);background:var(--ivory);display:grid;gap:10px;justify-items:center}
+.pcode .pc-label{font-size:13px;font-weight:500;letter-spacing:.06em;color:var(--muted)}
+.pcode .pc-code{font:700 28px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;color:var(--cocoa)}
+.pcode .pc-btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.pcode p{font-size:13.5px;line-height:1.6;color:var(--muted);margin:0}
 /* survey options: list rows instead of wrapping pills */
 .form fieldset + fieldset{border-top:1px solid var(--line);padding-top:26px}
 legend{display:block;width:100%;line-height:1.5;margin-bottom:2px!important}
@@ -905,6 +910,15 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
       <img src="sophie.jpg" alt="">
       <h3>고마워요, 잘 받았어요.</h3>
       <p>보내주신 이야기는 셀렉트숍을 준비하는 데 소중히 쓸게요.<br>이메일을 남겨주셨다면, 오픈에 맞춰 오픈 기념 혜택을 보내드릴게요.</p>
+      <div class="pcode" id="pcodeBox" hidden>
+        <span class="pc-label">X 이벤트 참여 코드</span>
+        <b class="pc-code" id="pcode"></b>
+        <div class="pc-btns">
+          <button type="button" class="btn btn-line" id="pcodeCopy">코드 복사</button>
+          <a class="btn btn-main" id="pcodeX" target="_blank" rel="noopener" hidden>X에 코드 남기기</a>
+        </div>
+        <p>X 이벤트 글에 이 코드를 댓글이나 인용으로 남겨주시면 추첨에 참여돼요. 당첨 안내는 코드를 남긴 X 계정으로 DM을 보내드려요.</p>
+      </div>
       <a class="btn btn-line" href="https://app.petlosophy.co.kr/app/" target="_blank" rel="noopener">다른 제품도 확인해보기</a>
     </div>
   </div>
@@ -1214,7 +1228,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
     petcheck:'1302591213', petdepth:'1292325561', petmethod:'144652330', petnocheck:'1783547025',
     pf:'2143399413', pfwhat:'838627961', pfprice:'1524598200', pfrebuy:'1971144647', pfyes:'499566281', pfno:'769481381',
     know:'2048420456', intent:'1633720541', spend:'1794421606', age:'1641112334', comment:'2137961449', email:'769750614',
-    consent:'94733687', fromApp:'573634854', vid:'1142026457', dup:'1634258879', pfbrand:'911051156', pfknow:'1864828134', where:'1665306345', petwhere:'689544814'};
+    consent:'94733687', fromApp:'573634854', vid:'1142026457', dup:'1634258879', pfbrand:'911051156', pfknow:'1864828134', where:'1665306345', petwhere:'689544814', code:'429439524'};
 
   // 설문: 단독 선택 보기, 조건부 질문, 반려인/비반려인 분기, 자동 번호
   const formEl = document.getElementById('surveyForm');
@@ -1255,6 +1269,15 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
   window.__syncSurvey = syncSurvey;
   syncSurvey();
 
+  // X 이벤트 참여 코드 — 이벤트 글을 올린 뒤 그 글의 숫자 ID를 넣으면 'X에 코드 남기기' 버튼이 그 글의 답글 창으로 연결돼요.
+  const EVENT_TWEET_ID = '';
+  function showCode(code){
+    const box = document.getElementById('pcodeBox'); if (!box || !code) return;
+    document.getElementById('pcode').textContent = code; box.hidden = false;
+    const cp = document.getElementById('pcodeCopy');
+    cp.onclick = async () => { try { await navigator.clipboard.writeText(code); cp.textContent = '복사됐어요'; } catch (e) { cp.textContent = code; } setTimeout(() => cp.textContent = '코드 복사', 2000); };
+    if (EVENT_TWEET_ID){ const x = document.getElementById('pcodeX'); x.href = 'https://x.com/intent/post?in_reply_to=' + EVENT_TWEET_ID + '&text=' + encodeURIComponent('PETLOSOPHY 설문 참여 완료! 참여 코드 ' + code); x.hidden = false; }
+  }
   const form = document.getElementById('surveyForm');
   const msg = document.getElementById('formMsg');
   form.addEventListener('submit', async e => {
@@ -1264,7 +1287,9 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ msg.textContent = '이메일 주소 형식을 확인해 주세요.'; return; }
     if (email && !fd.get('consent')){ msg.textContent = '이메일을 남기시려면 수집·이용 동의에 체크해 주세요.'; return; }
     let doneBefore = 'N'; try { doneBefore = localStorage.getItem('pl_survey_done') ? 'Y' : 'N'; } catch (e) {}
-    const data = { fromApp: location.hash === '#from-app', submittedAt: new Date().toISOString(), vid: window.__plVid || '', dup: doneBefore };
+    let code = ''; try { code = localStorage.getItem('pl_code') || ''; } catch (e) {}
+    if (!code){ const A = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'; code = 'PL-' + Array.from(crypto.getRandomValues(new Uint8Array(5)), b => A[b % A.length]).join(''); }
+    const data = { fromApp: location.hash === '#from-app', submittedAt: new Date().toISOString(), vid: window.__plVid || '', dup: doneBefore, code };
     ['pet','bought','found','where','petwhere','checked','freq','method','trigger','hard','never','claim','contact','petcheck','petdepth','petmethod','petnocheck','pf','pfwhat','pfprice','pfrebuy','pfyes','pfno','know','intent','spend','age'].forEach(k => {
       const v = fd.getAll(k); data[k] = v.length > 1 ? v : (v[0] || '');
     });
@@ -1289,7 +1314,9 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
     form.hidden = true;
     const th = document.getElementById('thanks'); th.hidden = false;
     try { localStorage.setItem('pl_survey_done', '1'); } catch (e) {}
-    window.__plLog && window.__plLog('설문 제출', (data.pet || '') + (doneBefore === 'Y' ? ' · 재응답' : ''));
+    try { localStorage.setItem('pl_code', code); } catch (e) {}
+    showCode(code);
+    window.__plLog && window.__plLog('설문 제출', (data.pet || '') + (doneBefore === 'Y' ? ' · 재응답' : '') + ' · ' + code);
     th.scrollIntoView({block:'center'});
   });
 })();
