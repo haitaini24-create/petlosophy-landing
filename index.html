@@ -76,10 +76,10 @@ section{padding-block:clamp(64px,9vw,112px)}
 .top-actions .btn{min-height:38px;padding:0 14px;font-size:13px}
 @media (max-width:900px){.nav{display:none}}
 @media (max-width:420px){.top-actions .app-open{display:none}}
-.lang-sw{display:flex;align-items:center;gap:2px;padding:3px 4px 3px 9px;border:1.5px solid var(--cocoa);border-radius:999px;background:var(--paper);box-shadow:0 2px 10px rgba(96,65,45,.12)}
+.lang-sw{display:flex;align-items:center;gap:2px;min-height:38px;padding:3px 4px 3px 10px;border:1.5px solid var(--sand);border-radius:999px;background:transparent}
 .lang-sw svg{width:16px;height:16px;color:var(--cocoa);flex:none;margin-right:2px}
-.lang-sw button{border:0;background:transparent;border-radius:999px;min-height:30px;padding:0 10px;font:600 13px/1 var(--body);color:var(--cocoa);cursor:pointer;white-space:nowrap}
-.lang-sw button[aria-pressed="true"]{background:var(--cocoa);color:#FFFDF9}
+.lang-sw button{border:0;background:transparent;border-radius:999px;min-height:28px;padding:0 10px;font:500 13px/1 var(--body);color:var(--muted);cursor:pointer;white-space:nowrap}
+.lang-sw button[aria-pressed="true"]{background:var(--sand-soft);color:var(--cocoa);font-weight:700}
 .lang-sw button:not([aria-pressed="true"]):hover{background:var(--sand-soft)}
 .lang-sw .ls{display:none}
 @media (max-width:1320px){.lang-sw .lf{display:none}.lang-sw .ls{display:inline}.lang-sw button{padding:0 9px}}
