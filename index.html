@@ -1280,6 +1280,9 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
   const BUY = {"ifuluv-hand": ["coupang", "https://link.coupang.com/a/ikhc5Vv0y4"], "aquaphor": ["coupang", "https://link.coupang.com/a/ikhf1o9Hwq"], "physiogel-body": ["coupang", "https://link.coupang.com/a/ikhggmRwyW"], "physiogel-face": ["coupang", "https://link.coupang.com/a/ikhgvmo7Ay"], "punite-hand": ["amazon", "https://www.amazon.co.jp/dp/B0BSRRJQ6B"], "hbah-lip": ["rakuten", "https://a.r10.to/hgoVDz"], "revanche-lip": ["rakuten", "https://a.r10.to/h5JxnB"], "hbah-body": ["rakuten", "https://a.r10.to/hPaSft"], "labruket-lip": ["coupang", "https://link.coupang.com/a/iklMD72j7Y"], "hbah-hand": ["rakuten", "https://a.r10.to/hF3FiA"], "skinship-hand": ["rakuten", "https://a.r10.to/hYOObR"], "ronnie-milk": ["amazon", "https://www.amazon.co.jp/dp/B0BKP23M5H?tag=petlosophy-22"]};
   // 두 번째 구매처 (같은 제품을 다른 쇼핑몰에서도 팔 때)
   const BUY2 = {"skinship-hand": ["amazon", "https://www.amazon.co.jp/dp/B0FQV21YLJ?tag=petlosophy-22"]};
+  const NEKOICHA_STORE = 'https://item.rakuten.co.jp/nekoicha/nekoicha-hc01/';
+  const PENDING_LABEL = {ko:'성분 검토 전', ja:'成分確認前', en:'Ingredients not reviewed'};
+  const NEKOICHA_BUY_LABEL = {ko:'라쿠텐 공식 판매처', ja:'楽天市場 公式ショップ', en:'Official store on Rakuten'};
   const STORE = {coupang:{ko:'쿠팡 최저가',ja:'Coupangで見る（韓国）',en:'View on Coupang (Korea)'}, amazon:{ko:'Amazon에서 보기 (일본)',ja:'Amazonで見る',en:'View on Amazon Japan'}, rakuten:{ko:'라쿠텐에서 보기 (일본)',ja:'楽天市場で見る',en:'View on Rakuten'}};
   const OFFNAME = {"aquaphor": {"ko": "올리브영", "ja": "Olive Young（韓国）", "en": "Olive Young (Korea)"}};
   // img: 제품 이미지 주소(제휴 프로그램 제공 이미지 또는 브랜드 제공 이미지). 비어 있으면 카테고리 아이콘 표시.
@@ -1297,6 +1300,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
       {id:'revanche-lip', icon:'lip', img:'https://thumbnail.image.rakuten.co.jp/@0_mall/daieifood/cabinet/revanche/1bn44.jpg?_ex=400x400', brand:'REVANCHE', name:{ko:'르방슈 베지터블 립', ja:'ルバンシュ ベジタブルリップ', en:'Revanche Vegetable Lip'}, cat:{ko:'립', ja:'リップ', en:'Lip'}, q:'ルバンシュ ベジタブルリップ'},
       {id:'hbah-body', icon:'lotion', img:'https://thumbnail.image.rakuten.co.jp/@0_mall/hbah-project/cabinet/11636699/imgrc0105521837.jpg?_ex=400x400', brand:'HBAH project', name:{ko:'개·고양이와 사는 사람을 위한 바디밀크', ja:'犬猫と一緒に暮らす人のためのボディミルク', en:'Body Milk for People Who Live with Dogs & Cats'}, cat:{ko:'바디', ja:'ボディ', en:'Body'}, q:'犬猫と一緒に暮らす人のためのボディミルク'},
       {id:'skinship-hand', icon:'hand', img:'', brand:'MEDICAT', name:{ko:'스킨십 핸드크림 (약사×수의사 감수)', ja:'スキンシップハンドクリーム（薬剤師×獣医師監修）', en:'Skinship Hand Cream (pharmacist × vet supervised)'}, cat:{ko:'핸드', ja:'ハンド', en:'Hand'}, q:'スキンシップハンドクリーム 獣医師監修'},
+      {id:'nekoicha-hand', icon:'hand', img:'', reviewPending:true, brand:'NEKOICHA', name:{ko:'네코이차 핸드크림 60g', ja:'ねこいちゃ ハンドクリーム 60g', en:'NEKOICHA Hand Cream 60g'}, cat:{ko:'핸드', ja:'ハンド', en:'Hand'}, q:'ねこいちゃ ハンドクリーム'},
       {id:'ronnie-milk', icon:'lotion', img:'', brand:'RONNIE', name:{ko:'로니 스킨밀크 (유액) 100ml', ja:'ロニースキンミルク（乳液）100ml', en:'Ronnie Skin Milk (emulsion) 100ml'}, cat:{ko:'얼굴·바디', ja:'フェイス・ボディ', en:'Face · Body'}, q:'ロニースキンミルク'},
     ]
   };
@@ -1314,7 +1318,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
   const track = document.getElementById('selTrack');
   const selModal = document.getElementById('selModal');
   if (track){
-    const card = (p, l) => `<button class="sel-card" type="button" data-pid="${p.id}"><div class="sel-art">${artOf(p)}<span class="sel-badge">${(isJp(p) ? TXT[l].badgeJp : TXT[l].badgeKr) || TXT[l].badge}</span></div><div class="sel-body"><small>${esc(tr(p.brand, l))} · ${esc(tr(p.cat, l))}</small><b>${esc(tr(p.name, l))}</b><span>${CARD[p.id].map(k => EFF[k][l]).join(' · ')}</span></div></button>`;
+    const card = (p, l) => `<button class="sel-card" type="button" data-pid="${p.id}"><div class="sel-art">${artOf(p)}<span class="sel-badge">${p.reviewPending ? PENDING_LABEL[l] : ((isJp(p) ? TXT[l].badgeJp : TXT[l].badgeKr) || TXT[l].badge)}</span></div><div class="sel-body"><small>${esc(tr(p.brand, l))} · ${esc(tr(p.cat, l))}</small><b>${esc(tr(p.name, l))}</b><span>${p.reviewPending ? NEKOICHA_BUY_LABEL[l] : CARD[p.id].map(k => EFF[k][l]).join(' · ')}</span></div></button>`;
     let shownLang = '';
     const render = () => {
       const l = L(); if (l === shownLang) return; shownLang = l;
@@ -1333,6 +1337,13 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
     render();
     const openSel = id => {
       const l = L(); const p = listFor(l).find(x => x.id === id); if (!p) return;
+      if (p.id === 'nekoicha-hand') {
+        const note = {ko:'라쿠텐 공식 판매처를 확인했어요. PETLOSOPHY 성분 검토 전인 제품입니다.', ja:'楽天市場の公式販売店を確認しました。PETLOSOPHYによる成分確認前の商品です。', en:'The official Rakuten listing is confirmed. PETLOSOPHY has not reviewed this product’s ingredients.'};
+        document.getElementById('selBody').innerHTML = `<div class="sm-top"><div class="sm-art">${artOf(p)}</div><div class="sm-side"><div class="sm-buy"><a class="btn btn-main" href="${NEKOICHA_STORE}" target="_blank" rel="noopener" data-buy="official-rakuten">${NEKOICHA_BUY_LABEL[l]}</a></div></div></div><small>NEKOICHA · ${esc(tr(p.cat,l))}</small><h3 id="selTitle">${esc(tr(p.name,l))}</h3><p class="sm-note">${note[l]}</p>`;
+        selModal.dataset.pid=id; selModal.hidden=false; selModal.querySelector('.x').focus();
+        window.__plLog && window.__plLog('제품 판매처 보기',id);
+        return;
+      }
       const T = TXT[l], b = BUY[p.id], b2 = BUY2[p.id], off = OFF[p.id];
       const buy = (b ? `<a class="btn btn-main" href="${esc(b[1])}" target="_blank" rel="noopener sponsored" data-buy="lowest">${STORE[b[0]][l]}</a>` : '') + (b2 ? `<a class="btn btn-main" href="${esc(b2[1])}" target="_blank" rel="noopener sponsored" data-buy="lowest2">${STORE[b2[0]][l]}</a>` : '') + (off ? `<a class="btn btn-line" href="${esc(off)}" target="_blank" rel="noopener" data-buy="official">${esc(tr(OFFNAME[p.id], l) || T.off)}</a>` : '');
       document.getElementById('selBody').innerHTML = `<div class="sm-top"><div class="sm-art">${artOf(p)}</div><div class="sm-side"><div class="sm-buy">${buy}</div></div></div><small>${esc(tr(p.brand, l))} · ${esc(tr(p.cat, l))}</small><h3 id="selTitle">${esc(tr(p.name, l))}</h3><p class="sm-h">${T.feat}</p><ul class="sm-eff">${ANAL[p.id].eff.map(([k, n, ev]) => `<li><b>${EFF[k][l]}</b><span class="sm-lv" role="img" aria-label="${n}/3">${'●'.repeat(n)}<i>${'●'.repeat(3 - n)}</i></span><small>${esc(tr(ev, l))}</small></li>`).join('')}</ul><p class="sm-sum">${esc(tr(ANAL[p.id].sum, l))}</p><p class="sm-est">${T.est}</p>${REV[p.id] ? `<div class="sm-rev"><p class="sm-h">${T.revH}</p><small>${esc(tr(REV[p.id].src, l))}</small><p><b>${T.good}</b>${esc(tr(REV[p.id].good, l))}</p><p><b>${T.bad}</b>${esc(tr(REV[p.id].bad, l))}</p></div>` : `<p class="sm-est">${T.noRev}</p>`}<details class="sm-ing"><summary>${T.ing}</summary><p>${esc(tr(ING[p.id], l) || '')}</p></details><div class="sm-disc">${b && b[0] === 'coupang' ? `<p class="sm-cp">이 게시물은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>` : ''}${b && (b[0] !== 'coupang' || l !== 'ko') ? `<p class="sm-cp">${T.pr}</p>` : ''}${(b2 && b2[0] === 'amazon') || (b && b[0] === 'amazon') ? `<p class="sm-cp">Amazonのアソシエイトとして、PETLOSOPHYは適格販売により収入を得ています。</p>` : ''}${b ? `<p class="sm-why">${T.why}</p>` : ''}</div><p class="sm-note">${T.note}</p>`;
