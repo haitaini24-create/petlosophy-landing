@@ -401,6 +401,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
 /* mobile bar */
 .mbar{display:none}
 .cta-en-mobile{display:none}
+@media (max-width:520px){html:is([lang="en"],[lang="ja"]) .top-actions .app-open{display:none}}
 /* Longer translations must fit the same mobile controls without clipping. */
 @media (max-width:820px){
   html:is([lang="en"],[lang="ja"]) .btn{min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere;text-align:center;line-height:1.4;padding:10px 16px}
