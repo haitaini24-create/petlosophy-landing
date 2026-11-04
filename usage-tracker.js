@@ -28,8 +28,9 @@
   send('store_click',pid,store);
  });
  const timers=new Map();
+ document.addEventListener('visibilitychange',()=>{for(const timer of timers.values())clearTimeout(timer);timers.clear();if(!document.hidden)document.querySelectorAll('.sel-card').forEach(card=>{observer.unobserve(card);observer.observe(card);});});
  const observer=new IntersectionObserver(entries=>{for(const e of entries){const card=e.target,key=card.dataset.pid+':'+lang();if(e.isIntersecting&&e.intersectionRatio>=.5&&!document.hidden&&!impressions.has(key)){
-   if(!timers.has(card))timers.set(card,setTimeout(()=>{timers.delete(card);const r=card.getBoundingClientRect();if(document.hidden||r.bottom<=0||r.top>=innerHeight)return;if(!impressions.has(key)){impressions.add(key);send('product_impression',card.dataset.pid)}},1000));
+   if(!timers.has(card))timers.set(card,setTimeout(()=>{timers.delete(card);const r=card.getBoundingClientRect();if(document.hidden||r.bottom<=0||r.top>=innerHeight)return;if(!impressions.has(key)){impressions.add(key);send('product_impression',card.dataset.pid)}},5000));
   }else{clearTimeout(timers.get(card));timers.delete(card);}}},{threshold:[0,.5]});
  function observeCards(){document.querySelectorAll('.sel-card').forEach(card=>{if(!card.dataset.usageObserved){card.dataset.usageObserved='1';observer.observe(card);}});}
  let reviewObserver;
