@@ -14,6 +14,12 @@
  let activeAt=0,impressions=new Set();
  function activity(){if(document.hidden)return;if(Date.now()-activeAt>30*60*1000)impressions=new Set();activeAt=Date.now();send('activity');}
  activity();setInterval(activity,60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)activity()});
+ // Count only time while this landing page is visible. Each milestone is sent
+ // once per page view; the dashboard deduplicates it again by visitor.
+ const dwellMilestones=[{ms:5*60*1000,event:'landing_dwell_5m'},{ms:10*60*1000,event:'landing_dwell_10m'},{ms:30*60*1000,event:'landing_dwell_30m'}];
+ let visibleDwellMs=0,visibleSince=document.hidden?0:Date.now();const reachedDwellMilestones=new Set();
+ function updateVisibleDwell(force=false){if((document.hidden&&!force)||!visibleSince)return;const now=Date.now();visibleDwellMs+=Math.max(0,now-visibleSince);visibleSince=now;for(const milestone of dwellMilestones)if(visibleDwellMs>=milestone.ms&&!reachedDwellMilestones.has(milestone.event)){reachedDwellMilestones.add(milestone.event);send(milestone.event);}}
+ setInterval(updateVisibleDwell,1000);document.addEventListener('visibilitychange',()=>{if(document.hidden){updateVisibleDwell(true);visibleSince=0;}else visibleSince=Date.now();});
  // The legacy logger is also called through local closures; wrap its sink, not
  // just window.__plLog, so survey starts and app-link clicks cannot bypass us.
  window.__plRecordUsageEvent=function(event,detail){
