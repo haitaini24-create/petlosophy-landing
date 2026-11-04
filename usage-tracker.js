@@ -8,7 +8,8 @@
  function send(event,product='',store=''){
   if(!/^[a-z0-9_-]{0,80}$/.test(product)||!/^[a-z0-9_-]{0,40}$/.test(store))return;
   const payload={p_id:id(),p_anonymous_id:visitor,p_event_name:event,p_product_id:product,p_store_id:store,p_source:source,p_language:lang(),p_device_type:device,p_is_dev:!!window.__plDev};
-  void fetch(c.url+'/rest/v1/rpc/record_landing_usage',{method:'POST',headers:{apikey:c.key,'Content-Type':'application/json'},body:JSON.stringify(payload),keepalive:true}).catch(()=>{});
+  // Retry a transient failure with the SAME receipt, so retries cannot inflate counts.
+  void (async()=>{for(let attempt=0;attempt<3;attempt++){try{const r=await fetch(c.url+'/rest/v1/rpc/record_landing_usage',{method:'POST',headers:{apikey:c.key,'Content-Type':'application/json'},body:JSON.stringify(payload),keepalive:true});if(r.ok||r.status<500&&r.status!==429)return;}catch{}if(attempt<2)await new Promise(resolve=>setTimeout(resolve,500*(attempt+1)));}})();
  }
  let activeAt=0,impressions=new Set();
  function activity(){if(document.hidden)return;if(Date.now()-activeAt>30*60*1000)impressions=new Set();activeAt=Date.now();send('activity');}

@@ -11,3 +11,9 @@ assert.deepEqual(bodies.map(b=>b.p_event_name),['activity','survey_start','app_c
 assert(!JSON.stringify(bodies).includes('private@example.com'));assert.equal(bodies.at(-1).p_product_id,'nekoicha-hand');
 for(const script of html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g))if(script[1].trim())new vm.Script(script[1]);
 console.log('PASS: legacy local closures, app clicks, submissions, product cards, privacy allow-list and inline JS');
+const retryRequests=[];let attempts=0;
+const retryContext={...context,window:{...context.window},fetch:(url,init)=>{retryRequests.push(JSON.parse(init.body));return Promise.resolve({ok:++attempts>1,status:attempts>1?200:503});},setTimeout:fn=>{fn();return 0;}};
+vm.createContext(retryContext);vm.runInContext(tracker,retryContext);
+await new Promise(resolve=>setImmediate(resolve));
+assert.equal(retryRequests.length,2);assert.equal(retryRequests[0].p_id,retryRequests[1].p_id);assert.deepEqual(retryRequests[0],retryRequests[1]);
+console.log('PASS: transient failure retries the identical receipt without double counting');
