@@ -13,8 +13,9 @@
  let activeAt=0,impressions=new Set();
  function activity(){if(document.hidden)return;if(Date.now()-activeAt>30*60*1000)impressions=new Set();activeAt=Date.now();send('activity');}
  activity();setInterval(activity,60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)activity()});
- const previous=window.__plLog;
- window.__plLog=function(event,detail){previous?.(event,detail);
+ // The legacy logger is also called through local closures; wrap its sink, not
+ // just window.__plLog, so survey starts and app-link clicks cannot bypass us.
+ window.__plRecordUsageEvent=function(event,detail){
   const map={'설문 시작':'survey_start','설문 제출':'survey_submit_reported','앱 이동':'app_click'};
   if(map[event])send(map[event]);
   if(event==='추천 제품 보기'){send('product_open',detail);observeReviews(detail);}

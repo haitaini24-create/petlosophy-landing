@@ -1,0 +1,13 @@
+import fs from 'node:fs';import vm from 'node:vm';import assert from 'node:assert/strict';
+const root=new URL('../',import.meta.url),html=fs.readFileSync(new URL('index.html',root),'utf8'),tracker=fs.readFileSync(new URL('usage-tracker.js',root),'utf8');
+const logger=html.slice(html.indexOf('  function log(ev, detail){'),html.indexOf('  window.__plLog = log;'));
+assert(logger.includes('__plRecordUsageEvent'));
+const requests=[],listeners={};let id=0;
+const context={URL,URLSearchParams,window:{PETLOSOPHY_USAGE_PUBLIC:{url:'https://example.invalid',key:'public-test'},__plVid:'test-browser-12345678',__plLang:'en',__plDev:false},document:{hidden:false,referrer:'',addEventListener:(event,fn)=>listeners[event]=fn,querySelector:()=>null,querySelectorAll:()=>[],getElementById:()=>null},navigator:{userAgent:'Test'},location:{search:''},crypto:{randomUUID:()=>`test-event-${++id}`},fetch:(url,init)=>{requests.push({url,body:init.body});return Promise.resolve({ok:true});},IntersectionObserver:class{observe(){}disconnect(){}},MutationObserver:class{observe(){}},setInterval:()=>0,setTimeout:()=>0,clearTimeout:()=>{},LOG:'https://google.example.invalid',E:{vid:'1',ev:'2',detail:'3',ref:'4',dev:'5',first:'6',loc:'7'},vid:'test-browser-12345678',src:'direct',dev:'PC',first:'N',Intl};
+vm.createContext(context);vm.runInContext(logger+'\nwindow.__plLog=log;window.localClosure=()=>log("설문 시작","private@example.com");window.appClosure=()=>log("앱 이동","private@example.com");',context);vm.runInContext(tracker,context);
+context.window.localClosure();context.window.appClosure();context.window.__plLog('설문 제출','private@example.com');context.window.__plLog('추천 제품 보기','nekoicha-hand');
+const bodies=requests.filter(r=>r.url.endsWith('/record_landing_usage')).map(r=>JSON.parse(r.body));
+assert.deepEqual(bodies.map(b=>b.p_event_name),['activity','survey_start','app_click','survey_submit_reported','product_open']);
+assert(!JSON.stringify(bodies).includes('private@example.com'));assert.equal(bodies.at(-1).p_product_id,'nekoicha-hand');
+for(const script of html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g))if(script[1].trim())new vm.Script(script[1]);
+console.log('PASS: legacy local closures, app clicks, submissions, product cards, privacy allow-list and inline JS');
