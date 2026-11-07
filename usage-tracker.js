@@ -19,8 +19,8 @@
   if(event!=='activity'){const rows=pending();rows.push({...payload,createdAt:Date.now()});storePending(rows.slice(-200))}
   void deliver(payload);
  }
- let activeAt=0,impressions=new Set();
- function activity(){if(document.hidden)return;if(Date.now()-activeAt>30*60*1000)impressions=new Set();activeAt=Date.now();send('activity');}
+ let activeAt=0,impressions=new Set(),carouselSeen=false;
+ function activity(){if(document.hidden)return;if(Date.now()-activeAt>30*60*1000){impressions=new Set();carouselSeen=false}activeAt=Date.now();send('activity');}
  activity();setInterval(activity,60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)activity()});
  // Count only time while this landing page is visible. Each milestone is sent
  // once per page view; the dashboard deduplicates it again by visitor.
@@ -44,7 +44,7 @@
  const timers=new Map();
  document.addEventListener('visibilitychange',()=>{for(const timer of timers.values())clearTimeout(timer);timers.clear();if(!document.hidden)document.querySelectorAll('.sel-card').forEach(card=>{observer.unobserve(card);observer.observe(card);});});
  const observer=new IntersectionObserver(entries=>{for(const e of entries){const card=e.target,key=card.dataset.pid+':'+lang();if(e.isIntersecting&&e.intersectionRatio>=.5&&!document.hidden&&!impressions.has(key)){
-   if(!timers.has(card))timers.set(card,setTimeout(()=>{timers.delete(card);const r=card.getBoundingClientRect(),visibleWidth=Math.max(0,Math.min(r.right,innerWidth)-Math.max(r.left,0)),visibleHeight=Math.max(0,Math.min(r.bottom,innerHeight)-Math.max(r.top,0));if(document.hidden||visibleWidth*visibleHeight<r.width*r.height*.5)return;if(!impressions.has(key)){impressions.add(key);send('product_impression',card.dataset.pid)}},5000));
+   if(!timers.has(card))timers.set(card,setTimeout(()=>{timers.delete(card);const r=card.getBoundingClientRect(),visibleWidth=Math.max(0,Math.min(r.right,innerWidth)-Math.max(r.left,0)),visibleHeight=Math.max(0,Math.min(r.bottom,innerHeight)-Math.max(r.top,0));if(document.hidden||visibleWidth*visibleHeight<r.width*r.height*.5)return;if(!impressions.has(key)){impressions.add(key);if(!carouselSeen){carouselSeen=true;send('carousel_exposure')}send('product_impression',card.dataset.pid)}},5000));
   }else{clearTimeout(timers.get(card));timers.delete(card);}}},{threshold:[0,.5]});
  function observeCards(){document.querySelectorAll('.sel-card').forEach(card=>{if(!card.dataset.usageObserved){card.dataset.usageObserved='1';observer.observe(card);}});}
  let reviewObserver;
