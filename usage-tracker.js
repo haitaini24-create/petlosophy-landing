@@ -12,11 +12,13 @@
  async function deliver(payload){for(let attempt=0;attempt<3;attempt++){try{const r=await fetch(c.url+'/rest/v1/rpc/record_landing_usage',{method:'POST',headers:{apikey:c.key,'Content-Type':'application/json'},body:JSON.stringify(payload),keepalive:true});if(r.ok){forget(payload.p_id);return}if(r.status<500&&r.status!==429){forget(payload.p_id);return}}catch{}if(attempt<2)await new Promise(resolve=>setTimeout(resolve,500*(attempt+1)))}}
  function retryPending(){for(const payload of pending())void deliver(payload)}
  retryPending();window.addEventListener('online',retryPending);document.addEventListener('visibilitychange',()=>{if(!document.hidden)retryPending()});
+ let firstActivity=true;
  function send(event,product='',store=''){
   if(!/^[a-z0-9_-]{0,80}$/.test(product)||!/^[a-z0-9_-]{0,40}$/.test(store))return;
   const payload={p_id:id(),p_anonymous_id:visitor,p_event_name:event,p_product_id:product,p_store_id:store,p_source:source,p_language:lang(),p_device_type:device,p_is_dev:!!window.__plDev};
   // Keep consequential events across a closed tab; the receipt ID prevents retry inflation.
-  if(event!=='activity'){const rows=pending();rows.push({...payload,createdAt:Date.now()});storePending(rows.slice(-200))}
+  if(event!=='activity'||firstActivity){const rows=pending();rows.push({...payload,createdAt:Date.now()});storePending(rows.slice(-200))}
+  if(event==='activity')firstActivity=false;
   void deliver(payload);
  }
  let activeAt=0,impressions=new Set(),carouselSeen=false;
