@@ -1735,6 +1735,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
   window.__plDev = isDev;
   if (isDev) src = '개발자';
   function log(ev, detail){
+    if (window.__plRecordUsageEvent) window.__plRecordUsageEvent(ev, detail || '');
     const b = new URLSearchParams();
     b.append('entry.' + E.vid, vid); b.append('entry.' + E.ev, ev); b.append('entry.' + E.detail, detail || '');
     b.append('entry.' + E.ref, src); b.append('entry.' + E.dev, dev); b.append('entry.' + E.first, first);
@@ -1800,5 +1801,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
   addEventListener('pagehide', flush);
 })();
 </script>
+<script src="usage-public-config.js"></script>
+<script src="usage-tracker.js"></script>
 </body>
 </html>
