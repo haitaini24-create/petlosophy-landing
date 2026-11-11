@@ -410,6 +410,14 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
 .modal-card img{width:220px;height:220px;margin:4px auto}
 .modal-card h3{font-size:22px}
 .modal-card p{color:var(--muted);font-size:14px}
+.launch-news-card{width:min(440px,100%);text-align:left;max-height:88vh;overflow:auto;gap:12px}
+.launch-news-card h3{font-size:25px}.launch-news-card .eyebrow{margin:0}
+.launch-news-card form{display:grid;gap:12px}.launch-news-card form>label:first-child{font-weight:700;font-size:14px}
+.launch-news-card input[type=text]{width:100%;border:1px solid var(--line);border-radius:12px;padding:13px 15px;font:inherit;background:#fff;color:var(--ink)}
+.launch-news-card .launch-news-consent{display:flex;align-items:flex-start;gap:9px;font-size:14px;line-height:1.5}
+.launch-news-card .launch-news-consent input{width:18px;height:18px;flex:none;margin-top:2px}
+.launch-news-card #launchNewsPrivacy{font-size:12px;line-height:1.5}.launch-news-card #launchNewsPrivacy a{text-decoration:underline}
+.launch-news-card #launchNewsSubmit{width:100%;justify-content:center}.launch-news-card #launchNewsStatus{min-height:1.5em;font-size:13px}
 .modal-url{font-size:12px;color:var(--muted);background:var(--ivory);border-radius:10px;padding:10px;word-break:break-all;user-select:all}
 .modal-actions{display:flex;gap:8px}
 .modal-actions .btn{flex:1;min-height:44px;font-size:14px;padding:0 12px}
@@ -1178,7 +1186,7 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
     <p class="lead">가장 가까운 존재를 생각하는 마음에서 시작해요.</p>
     <div class="hero-ctas">
       <a class="btn btn-main" href="https://app.petlosophy.co.kr/app/" target="_blank" rel="noopener">내 화장품 확인하기</a>
-      <a class="btn btn-line" href="#survey">오픈 소식 받기</a>
+      <button class="btn btn-line" type="button" data-open-launch-news>오픈 소식 받기</button>
     </div>
   </div>
 </section>
@@ -1211,19 +1219,37 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
   <div class="modal-card pv-card">
     <button class="x" type="button" data-close-pv aria-label="닫기">×</button>
     <h3 id="pvTitle">개인정보처리방침</h3>
-    <p>PETLOSOPHY는 랜딩페이지 설문에 필요한 최소한의 정보만 받아요.</p>
+    <p>PETLOSOPHY는 설문과 오픈 소식 안내에 필요한 정보만 받아요.</p>
     <h4>받는 정보와 쓰는 곳, 보관 기간</h4>
     <ul>
       <li>설문 응답(지역, 반려동물, 구매 경험, 연령대 등): 서비스 기획을 위한 통계 분석. 분석이 끝나면 파기(최대 1년)</li>
       <li>익명 방문자 ID(브라우저에 저장)와 이용 기록(머문 시간, 스크롤, 누른 버튼): 방문·이용 통계와 중복 응답 확인. 이름·연락처와 연결하지 않아요</li>
+      <li>오픈 소식 신청 시 이메일 또는 휴대전화 번호: PETLOSOPHY 출시 안내 발송. 동의 철회 시 또는 수집 후 2년 이내에 삭제해요.</li>
     </ul>
     <h4>저장 위치(국외 이전)</h4>
     <p>응답은 제출할 때 Google LLC(미국)의 Google 설문지·스프레드시트에 저장되고, 위 보관 기간이 끝나면 삭제해요.</p>
+    <p>오픈 소식 신청 연락처는 Supabase 데이터베이스에 설문 응답과 분리해 저장해요.</p>
     <h4>내 정보에 대한 권리</h4>
     <p>언제든 열람, 정정, 삭제, 동의 철회를 요청할 수 있어요. 만 14세 미만의 개인정보는 받지 않아요.</p>
     <h4>문의</h4>
     <p>개인정보 처리자: PETLOSOPHY · petlosophy2026@gmail.com</p>
     <p>시행일: 2026년 11월 2일</p>
+  </div>
+</div>
+<div class="modal" id="launchNewsModal" hidden role="dialog" aria-modal="true" aria-labelledby="launchNewsTitle">
+  <div class="modal-card launch-news-card">
+    <button class="x" type="button" data-close-launch-news aria-label="닫기">×</button>
+    <span class="eyebrow">PETLOSOPHY</span>
+    <h3 id="launchNewsTitle">오픈 소식 받기</h3>
+    <p id="launchNewsIntro">이메일 또는 휴대전화 번호를 남겨주시면 출시 소식을 보내드릴게요.</p>
+    <form id="launchNewsForm">
+      <label for="launchNewsContact" id="launchNewsLabel">이메일 또는 휴대전화 번호</label>
+      <input id="launchNewsContact" name="contact" type="text" autocomplete="email" required maxlength="254">
+      <label class="launch-news-consent"><input name="consent" type="checkbox" required><span id="launchNewsConsent">[필수] 연락처 수집·이용 및 출시 안내 수신에 동의합니다.</span></label>
+      <p id="launchNewsPrivacy">연락처는 출시 안내에만 사용하며, 동의 철회 시 또는 수집 후 2년 이내 삭제합니다. <a href="#privacy" data-open-pv>개인정보처리방침</a></p>
+      <button class="btn btn-main" type="submit" id="launchNewsSubmit">신청하기</button>
+      <p id="launchNewsStatus" role="status" aria-live="polite"></p>
+    </form>
   </div>
 </div>
 <div class="modal" id="qrModal" hidden role="dialog" aria-modal="true" aria-labelledby="qrTitle">
@@ -1623,6 +1649,10 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
   D['설문 응답은 개인을 알아볼 수 없게 통계로만 써요. <a href="#privacy" data-open-pv="">개인정보처리방침</a>'] = ['Survey answers are used only as anonymous statistics. <a href="#privacy" data-open-pv="">Privacy policy</a>', '回答は個人が特定されない統計としてのみ使います。<a href="#privacy" data-open-pv="">プライバシーポリシー</a>'];
   D['보내주신 이야기는 반려인에게 꼭 필요한 서비스를 만드는 데 소중히 쓸게요.'] = ['Your answers will help us build a better service for pet parents.', 'いただいたご意見は、ペットと暮らす人に必要なサービスづくりに役立てます。'];
   D['PETLOSOPHY는 랜딩페이지 설문에 필요한 최소한의 정보만 받아요.'] = ['PETLOSOPHY collects only the minimum information needed for the survey.', 'PETLOSOPHYはアンケートに必要な最小限の情報だけを受け取ります。'];
+  D['오픈 소식 받기'] = ['Get launch updates', 'オープンのお知らせを受け取る'];
+  D['PETLOSOPHY는 설문과 오픈 소식 안내에 필요한 정보만 받아요.'] = ['PETLOSOPHY collects only the information needed for the survey and launch updates.', 'PETLOSOPHYはアンケートとオープン案内に必要な情報のみを収集します。'];
+  D['오픈 소식 신청 시 이메일 또는 휴대전화 번호: PETLOSOPHY 출시 안내 발송. 동의 철회 시 또는 수집 후 2년 이내에 삭제해요.'] = ['Email or phone number for launch updates: used to send PETLOSOPHY launch news. Deleted on withdrawal or within 2 years of collection.', 'オープン案内用のメールアドレスまたは電話番号：PETLOSOPHYのオープン案内に使用し、同意撤回時または収集から2年以内に削除します。'];
+  D['오픈 소식 신청 연락처는 Supabase 데이터베이스에 설문 응답과 분리해 저장해요.'] = ['Launch-update contacts are stored separately from survey responses in the Supabase database.', 'オープン案内の連絡先はアンケート回答とは別にSupabaseのデータベースへ保存します。'];
   const H = /[가-힣]/;
   const norm = s => s.replace(/\s+/g, ' ').trim();
   const nk = s => norm(s).replace(/<span class="qn">[^<]*<\/span>/g, '<span class="qn"></span>').replace(/ hidden=""/g, '');
@@ -1809,5 +1839,6 @@ footer{background:var(--espresso);color:var(--on-dark-muted);font-size:13px;padd
 <script src="/usage-tracker.js?v=20261110-restore"></script>
 <script src="/unified-measurement-v2.js?v=20261111-v2" data-surface="landing"></script>
 <script src="/engagement-meter.js?v=20261110-restore" data-surface="landing"></script>
+<script src="/launch-news.js?v=20261112-v1"></script>
 </body>
 </html>
