@@ -24,8 +24,9 @@
  const source=String(rawSource||'direct').toLowerCase().replace(/[^a-z0-9_.-]/g,'').slice(0,64)||'direct';
  const rawCampaign=surface==='app'?window.PLAppAcquisition?.campaign:(params.get('utm_campaign')||params.get('campaign_code'));
  const campaign=/^[a-z0-9_-]{1,64}$/.test(rawCampaign||'')?rawCampaign:null;
- let isTest=!!window.__plDev||params.get('me')==='1';
- try{isTest=isTest||localStorage.getItem('pl_dev')==='1'}catch{}
+ // A stored development flag can linger after a normal login. Count normal
+ // visitors; classify only explicit test pages or verified operator devices.
+ const isTest=params.get('me')==='1'||params.get('preview')==='internal';
  const pending=()=>{try{const rows=JSON.parse(localStorage.getItem(pendingKey)||'[]');return Array.isArray(rows)?rows.filter(x=>x?.p_event_id&&Date.now()-Date.parse(x.p_occurred_at)<72*3600000).slice(-500):[]}catch{return[]}};
  const save=rows=>{try{localStorage.setItem(pendingKey,JSON.stringify(rows))}catch{}};
  const inflight=new Set();
